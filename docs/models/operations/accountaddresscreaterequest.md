@@ -1,0 +1,9 @@
+# AccountAddressCreateRequest
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `RequestBody`                                                                                           | [AccountAddressCreateRequestBodyInput](../../models/operations/accountaddresscreaterequestbodyinput.md) | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `XPublishableKey`                                                                                       | *string*                                                                                                | :heavy_check_mark:                                                                                      | The publicly viewable identifier used to identify a merchant division.                                  |

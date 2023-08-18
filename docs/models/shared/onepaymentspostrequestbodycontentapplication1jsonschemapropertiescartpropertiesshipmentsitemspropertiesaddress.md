@@ -1,0 +1,17 @@
+# OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddress
+
+
+## Supported Types
+
+### AddressExplicitInput
+
+```go
+onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddress := shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressExplicit(shared.AddressExplicitInput{/* values here */})
+```
+
+### AddressID
+
+```go
+onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddress := shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressID(shared.AddressID{/* values here */})
+```
+

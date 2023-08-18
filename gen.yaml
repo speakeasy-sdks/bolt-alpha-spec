@@ -1,4 +1,9 @@
 configVersion: 1.0.0
+management:
+  docChecksum: 3da6dfe6bdce0654c3a1df6e1a3565f7
+  docVersion: 3.0.1
+  speakeasyVersion: 1.73.1
+  generationVersion: 2.84.3
 generation:
   comments:
     disableComments: false
@@ -7,7 +12,15 @@ generation:
   sdkClassName: bolt-alpha
   singleTagPerOp: false
   tagNamespacingDisabled: false
+features:
+  go:
+    core: 2.82.0
+    globalSecurity: 2.81.1
+    globalServerURLs: 2.82.0
+    inputOutputModels: 2.81.1
+    methodSecurity: 2.81.1
+    unions: 2.81.2
 go:
-  version: 0.0.1
+  version: 0.1.0
   maxMethodParams: 0
   packageName: github.com/speakeasy-sdks/bolt-alpha-spec

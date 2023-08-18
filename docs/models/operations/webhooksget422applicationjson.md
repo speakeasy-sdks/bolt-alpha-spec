@@ -1,0 +1,11 @@
+# WebhooksGet422ApplicationJSON
+
+An error has occured, e.g. the identifier is not associated with an existing Bolt account
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             | Example                                                                                                 |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `DotTag`                                                                                                | *string*                                                                                                | :heavy_check_mark:                                                                                      | The type of error returned                                                                              | invalid_address_region                                                                                  |
+| `Message`                                                                                               | *string*                                                                                                | :heavy_check_mark:                                                                                      | A human-readable error message, which might include information specific to<br/>the request that was made.<br/> | region value BC is not valid for country_code value US                                                  |
