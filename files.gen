@@ -199,3 +199,4 @@ docs/models/shared/eventlisteventlist.md
 docs/models/shared/eventlist.md
 docs/models/callbacks/webhookscreatewebhookeventresponse.md
 docs/models/callbacks/webhookscreatewebhookeventrequestbody.md
+.gitattributes
