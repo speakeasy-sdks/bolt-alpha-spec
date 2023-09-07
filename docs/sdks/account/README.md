@@ -46,7 +46,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Account.AccountAddPaymentMethod(ctx, operations.AccountAddPaymentMethodRequest{
         RequestBody: operations.AccountAddPaymentMethodRequestBodyInput{
-            BillingAddress: shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddress{},
+            BillingAddress: shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput{},
             Bin: "411111",
             Expiration: "2025-03",
             Last4: "1004",

@@ -154,43 +154,43 @@ func (o *PaymentsInitializeRequestBodyCartItems) GetUnitPrice() int64 {
 	return o.UnitPrice
 }
 
-type PaymentsInitializeRequestBodyCartShipmentsAddressType string
+type PaymentsInitializeRequestBodyCartShipmentsAddressInputType string
 
 const (
-	PaymentsInitializeRequestBodyCartShipmentsAddressTypeExplicit PaymentsInitializeRequestBodyCartShipmentsAddressType = "explicit"
-	PaymentsInitializeRequestBodyCartShipmentsAddressTypeID       PaymentsInitializeRequestBodyCartShipmentsAddressType = "id"
+	PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit PaymentsInitializeRequestBodyCartShipmentsAddressInputType = "explicit"
+	PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeID       PaymentsInitializeRequestBodyCartShipmentsAddressInputType = "id"
 )
 
-type PaymentsInitializeRequestBodyCartShipmentsAddress struct {
+type PaymentsInitializeRequestBodyCartShipmentsAddressInput struct {
 	AddressID            *shared.AddressID
 	AddressExplicitInput *shared.AddressExplicitInput
 
-	Type PaymentsInitializeRequestBodyCartShipmentsAddressType
+	Type PaymentsInitializeRequestBodyCartShipmentsAddressInputType
 }
 
-func CreatePaymentsInitializeRequestBodyCartShipmentsAddressExplicit(explicit shared.AddressExplicitInput) PaymentsInitializeRequestBodyCartShipmentsAddress {
-	typ := PaymentsInitializeRequestBodyCartShipmentsAddressTypeExplicit
+func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(explicit shared.AddressExplicitInput) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
+	typ := PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit
 	typStr := string(typ)
 	explicit.DotTag = typStr
 
-	return PaymentsInitializeRequestBodyCartShipmentsAddress{
+	return PaymentsInitializeRequestBodyCartShipmentsAddressInput{
 		AddressExplicitInput: &explicit,
 		Type:                 typ,
 	}
 }
 
-func CreatePaymentsInitializeRequestBodyCartShipmentsAddressID(id shared.AddressID) PaymentsInitializeRequestBodyCartShipmentsAddress {
-	typ := PaymentsInitializeRequestBodyCartShipmentsAddressTypeID
+func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(id shared.AddressID) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
+	typ := PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeID
 	typStr := string(typ)
 	id.DotTag = typStr
 
-	return PaymentsInitializeRequestBodyCartShipmentsAddress{
+	return PaymentsInitializeRequestBodyCartShipmentsAddressInput{
 		AddressID: &id,
 		Type:      typ,
 	}
 }
 
-func (u *PaymentsInitializeRequestBodyCartShipmentsAddress) UnmarshalJSON(data []byte) error {
+func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(data []byte) error {
 	var d *json.Decoder
 
 	type discriminator struct {
@@ -211,7 +211,7 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddress) UnmarshalJSON(data [
 		}
 
 		u.AddressExplicitInput = addressExplicitInput
-		u.Type = PaymentsInitializeRequestBodyCartShipmentsAddressTypeExplicit
+		u.Type = PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit
 		return nil
 	case "id":
 		d = json.NewDecoder(bytes.NewReader(data))
@@ -221,14 +221,14 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddress) UnmarshalJSON(data [
 		}
 
 		u.AddressID = addressID
-		u.Type = PaymentsInitializeRequestBodyCartShipmentsAddressTypeID
+		u.Type = PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeID
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u PaymentsInitializeRequestBodyCartShipmentsAddress) MarshalJSON() ([]byte, error) {
+func (u PaymentsInitializeRequestBodyCartShipmentsAddressInput) MarshalJSON() ([]byte, error) {
 	if u.AddressID != nil {
 		return json.Marshal(u.AddressID)
 	}
@@ -242,13 +242,13 @@ func (u PaymentsInitializeRequestBodyCartShipmentsAddress) MarshalJSON() ([]byte
 
 type PaymentsInitializeRequestBodyCartShipments struct {
 	// The Address object is used for shipping, and physical store address use cases.
-	Address *PaymentsInitializeRequestBodyCartShipmentsAddress `json:"address,omitempty"`
+	Address *PaymentsInitializeRequestBodyCartShipmentsAddressInput `json:"address,omitempty"`
 	// The name of the carrier selected.
 	Carrier *string                                                                                        `json:"carrier,omitempty"`
 	Cost    *shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts `json:"cost,omitempty"`
 }
 
-func (o *PaymentsInitializeRequestBodyCartShipments) GetAddress() *PaymentsInitializeRequestBodyCartShipmentsAddress {
+func (o *PaymentsInitializeRequestBodyCartShipments) GetAddress() *PaymentsInitializeRequestBodyCartShipmentsAddressInput {
 	if o == nil {
 		return nil
 	}

@@ -104,7 +104,7 @@ func (e *AccountAddPaymentMethodRequestBodyType) UnmarshalJSON(data []byte) erro
 
 type AccountAddPaymentMethodRequestBodyInput struct {
 	// The Address object is used for shipping, and physical store address use cases.
-	BillingAddress shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddress `json:"billing_address"`
+	BillingAddress shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput `json:"billing_address"`
 	// The Bank Identification Number for the credit card. This is typically the first 4-6 digits of the credit card number.
 	Bin string `json:"bin"`
 	// The expiration date of the credit card. TODO TO MAKE EXPIRATION REUSABLE
@@ -119,9 +119,9 @@ type AccountAddPaymentMethodRequestBodyInput struct {
 	Type AccountAddPaymentMethodRequestBodyType `json:"type"`
 }
 
-func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddress() shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddress {
+func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddress() shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput {
 	if o == nil {
-		return shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddress{}
+		return shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput{}
 	}
 	return o.BillingAddress
 }

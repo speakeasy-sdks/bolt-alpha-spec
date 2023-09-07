@@ -157,15 +157,6 @@ func main() {
                 Region: boltalpha.String("CA"),
                 Status: operations.TestingShipmentTrackingCreateRequestBodyTrackingDetailsStatusPreTransit.ToPointer(),
             },
-            operations.TestingShipmentTrackingCreateRequestBodyTrackingDetails{
-                CountryCode: boltalpha.String("US"),
-                EventDate: boltalpha.String("2014-08-21:T14:24:00Z"),
-                Locality: boltalpha.String("San Francisco"),
-                Message: boltalpha.String("Billing information received"),
-                PostalCode: boltalpha.String("94105"),
-                Region: boltalpha.String("CA"),
-                Status: operations.TestingShipmentTrackingCreateRequestBodyTrackingDetailsStatusPreTransit.ToPointer(),
-            },
         },
         TrackingNumber: "MockBolt-143292",
     }, operationSecurity)

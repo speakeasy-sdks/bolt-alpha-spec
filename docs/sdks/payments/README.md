@@ -55,45 +55,9 @@ func main() {
                         Code: boltalpha.String("SUMMER10DISCOUNT"),
                         DetailsURL: boltalpha.String("https://www.example.com/SUMMER-SALE"),
                     },
-                    shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartDiscounts{
-                        Amounts: shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
-                            Currency: "USD",
-                            Tax: boltalpha.Int64(900),
-                            Total: 900,
-                        },
-                        Code: boltalpha.String("SUMMER10DISCOUNT"),
-                        DetailsURL: boltalpha.String("https://www.example.com/SUMMER-SALE"),
-                    },
-                    shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartDiscounts{
-                        Amounts: shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
-                            Currency: "USD",
-                            Tax: boltalpha.Int64(900),
-                            Total: 900,
-                        },
-                        Code: boltalpha.String("SUMMER10DISCOUNT"),
-                        DetailsURL: boltalpha.String("https://www.example.com/SUMMER-SALE"),
-                    },
                 },
                 DisplayID: boltalpha.String("215614191"),
                 Items: []shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartItems{
-                    shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartItems{
-                        Description: boltalpha.String("Large tote with Bolt logo."),
-                        ImageURL: boltalpha.String("https://www.example.com/products/123456/images/1.png"),
-                        Name: "Bolt Swag Bag",
-                        Quantity: 1,
-                        Reference: "item_100",
-                        TotalAmount: 1000,
-                        UnitPrice: 1000,
-                    },
-                    shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartItems{
-                        Description: boltalpha.String("Large tote with Bolt logo."),
-                        ImageURL: boltalpha.String("https://www.example.com/products/123456/images/1.png"),
-                        Name: "Bolt Swag Bag",
-                        Quantity: 1,
-                        Reference: "item_100",
-                        TotalAmount: 1000,
-                        UnitPrice: 1000,
-                    },
                     shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartItems{
                         Description: boltalpha.String("Large tote with Bolt logo."),
                         ImageURL: boltalpha.String("https://www.example.com/products/123456/images/1.png"),
@@ -108,16 +72,7 @@ func main() {
                 OrderReference: "order_100",
                 Shipments: []shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipments{
                     shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipments{
-                        Address: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddress{},
-                        Carrier: boltalpha.String("FedEx"),
-                        Cost: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
-                            Currency: "USD",
-                            Tax: boltalpha.Int64(900),
-                            Total: 900,
-                        },
-                    },
-                    shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipments{
-                        Address: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddress{},
+                        Address: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInput{},
                         Carrier: boltalpha.String("FedEx"),
                         Cost: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
                             Currency: "USD",
@@ -129,7 +84,7 @@ func main() {
             },
             PaymentMethod: operations.GuestPaymentsInitializeRequestBodyPaymentMethod{},
         },
-        XPublishableKey: "iure",
+        XPublishableKey: "error",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
@@ -200,45 +155,9 @@ func main() {
                         Code: boltalpha.String("SUMMER10DISCOUNT"),
                         DetailsURL: boltalpha.String("https://www.example.com/SUMMER-SALE"),
                     },
-                    operations.PaymentsInitializeRequestBodyCartDiscounts{
-                        Amounts: shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
-                            Currency: "USD",
-                            Tax: boltalpha.Int64(900),
-                            Total: 900,
-                        },
-                        Code: boltalpha.String("SUMMER10DISCOUNT"),
-                        DetailsURL: boltalpha.String("https://www.example.com/SUMMER-SALE"),
-                    },
                 },
                 DisplayID: boltalpha.String("215614191"),
                 Items: []PaymentsInitializeRequestBodyCartItems{
-                    operations.PaymentsInitializeRequestBodyCartItems{
-                        Description: boltalpha.String("Large tote with Bolt logo."),
-                        ImageURL: boltalpha.String("https://www.example.com/products/123456/images/1.png"),
-                        Name: "Bolt Swag Bag",
-                        Quantity: 1,
-                        Reference: "item_100",
-                        TotalAmount: 1000,
-                        UnitPrice: 1000,
-                    },
-                    operations.PaymentsInitializeRequestBodyCartItems{
-                        Description: boltalpha.String("Large tote with Bolt logo."),
-                        ImageURL: boltalpha.String("https://www.example.com/products/123456/images/1.png"),
-                        Name: "Bolt Swag Bag",
-                        Quantity: 1,
-                        Reference: "item_100",
-                        TotalAmount: 1000,
-                        UnitPrice: 1000,
-                    },
-                    operations.PaymentsInitializeRequestBodyCartItems{
-                        Description: boltalpha.String("Large tote with Bolt logo."),
-                        ImageURL: boltalpha.String("https://www.example.com/products/123456/images/1.png"),
-                        Name: "Bolt Swag Bag",
-                        Quantity: 1,
-                        Reference: "item_100",
-                        TotalAmount: 1000,
-                        UnitPrice: 1000,
-                    },
                     operations.PaymentsInitializeRequestBodyCartItems{
                         Description: boltalpha.String("Large tote with Bolt logo."),
                         ImageURL: boltalpha.String("https://www.example.com/products/123456/images/1.png"),
@@ -253,7 +172,7 @@ func main() {
                 OrderReference: "order_100",
                 Shipments: []PaymentsInitializeRequestBodyCartShipments{
                     operations.PaymentsInitializeRequestBodyCartShipments{
-                        Address: &operations.PaymentsInitializeRequestBodyCartShipmentsAddress{},
+                        Address: &operations.PaymentsInitializeRequestBodyCartShipmentsAddressInput{},
                         Carrier: boltalpha.String("FedEx"),
                         Cost: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
                             Currency: "USD",
@@ -265,7 +184,7 @@ func main() {
             },
             PaymentMethod: operations.PaymentsInitializeRequestBodyPaymentMethod{},
         },
-        XPublishableKey: "delectus",
+        XPublishableKey: "deserunt",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
