@@ -1,7 +1,5 @@
 # Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchemaOutput
 
-The payment method was successfully added
-
 
 ## Fields
 

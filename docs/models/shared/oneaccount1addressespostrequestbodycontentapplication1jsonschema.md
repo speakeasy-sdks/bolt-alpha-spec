@@ -1,7 +1,5 @@
 # Oneaccount1addressesPostRequestBodyContentApplication1jsonSchema
 
-The address was successfully added
-
 
 ## Fields
 

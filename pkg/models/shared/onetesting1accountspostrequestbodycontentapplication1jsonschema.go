@@ -68,7 +68,6 @@ func (e *Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaPhoneSta
 	}
 }
 
-// Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput - The account was successfully created
 type Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput struct {
 	DeactivateAt time.Time                                                                 `json:"deactivate_at"`
 	Email        string                                                                    `json:"email"`

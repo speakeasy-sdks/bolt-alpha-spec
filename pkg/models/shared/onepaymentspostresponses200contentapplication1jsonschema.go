@@ -121,7 +121,6 @@ func (e *OnepaymentsPostResponses200ContentApplication1jsonSchemaStatus) Unmarsh
 	}
 }
 
-// OnepaymentsPostResponses200ContentApplication1jsonSchema - Payment token retrieved
 type OnepaymentsPostResponses200ContentApplication1jsonSchema struct {
 	Action *OnepaymentsPostResponses200ContentApplication1jsonSchemaAction `json:"action,omitempty"`
 	ID     *string                                                         `json:"id,omitempty"`

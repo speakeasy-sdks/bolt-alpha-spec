@@ -1,7 +1,5 @@
 # OnepaymentsPostResponses200ContentApplication1jsonSchema
 
-Payment token retrieved
-
 
 ## Fields
 

@@ -2,7 +2,6 @@
 
 package shared
 
-// Oneaccount1addressesPostRequestBodyContentApplication1jsonSchema - The address was successfully added
 type Oneaccount1addressesPostRequestBodyContentApplication1jsonSchema struct {
 	Company        *string `json:"company,omitempty"`
 	CountryCode    string  `json:"country_code"`

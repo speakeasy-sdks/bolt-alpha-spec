@@ -2,7 +2,6 @@
 
 package shared
 
-// Onemerchant1callbacksPatchRequestBodyContentApplication1jsonSchema - Callbacks URLs were successfully retrieved
 type Onemerchant1callbacksPatchRequestBodyContentApplication1jsonSchema struct {
 	AccountPage                   *string `json:"account_page,omitempty"`
 	BaseDomain                    *string `json:"base_domain,omitempty"`
