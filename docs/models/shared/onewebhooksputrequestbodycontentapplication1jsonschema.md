@@ -1,7 +1,5 @@
 # OnewebhooksPutRequestBodyContentApplication1jsonSchema
 
-The webhook was successfully created
-
 
 ## Fields
 

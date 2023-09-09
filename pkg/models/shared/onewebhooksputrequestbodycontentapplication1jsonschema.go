@@ -96,7 +96,6 @@ func (u OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent) MarshalJSON
 	return nil, nil
 }
 
-// OnewebhooksPutRequestBodyContentApplication1jsonSchema - The webhook was successfully created
 type OnewebhooksPutRequestBodyContentApplication1jsonSchema struct {
 	// The time at which the webhook was created
 	CreatedAt *time.Time                                                  `json:"created_at,omitempty"`

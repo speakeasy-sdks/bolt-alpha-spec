@@ -1,7 +1,5 @@
 # Onemerchant1callbacksPatchRequestBodyContentApplication1jsonSchema
 
-Callbacks URLs were successfully retrieved
-
 
 ## Fields
 

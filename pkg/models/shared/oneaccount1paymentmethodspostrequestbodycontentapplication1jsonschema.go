@@ -81,7 +81,6 @@ func (e *Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchemaTy
 	}
 }
 
-// Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchemaOutput - The payment method was successfully added
 type Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchemaOutput struct {
 	// The ID of credit card's billing address
 	BillingAddressID *string `json:"billing_address_id,omitempty"`

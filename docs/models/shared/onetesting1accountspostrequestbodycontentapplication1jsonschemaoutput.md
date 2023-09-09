@@ -1,7 +1,5 @@
 # Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput
 
-The account was successfully created
-
 
 ## Fields
 
