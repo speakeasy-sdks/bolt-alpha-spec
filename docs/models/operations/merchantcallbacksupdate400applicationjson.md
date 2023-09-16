@@ -3,11 +3,9 @@
 The request is missing required fields, or its fields have invalid values
 
 
-## Supported Types
+## Fields
 
-### MerchantCallbacksUpdate400ApplicationJSON1
-
-```go
-merchantCallbacksUpdate400ApplicationJSON := operations.CreateMerchantCallbacksUpdate400ApplicationJSONMerchantCallbacksUpdate400ApplicationJSON1(operations.MerchantCallbacksUpdate400ApplicationJSON1{/* values here */})
-```
-
+| Field                                                                                                                   | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             | Example                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `DotTag`                                                                                                                | [MerchantCallbacksUpdate400ApplicationJSONTag](../../models/operations/merchantcallbacksupdate400applicationjsontag.md) | :heavy_check_mark:                                                                                                      | The type of error returned                                                                                              | invalid_url                                                                                                             |
+| `Message`                                                                                                               | *string*                                                                                                                | :heavy_check_mark:                                                                                                      | A human-readable error message, which might include information specific to<br/>the request that was made.<br/>         | region value BC is not valid for country_code value US                                                                  |

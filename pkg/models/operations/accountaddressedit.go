@@ -220,7 +220,8 @@ func (u AccountAddressEdit400ApplicationJSON) MarshalJSON() ([]byte, error) {
 		return json.Marshal(u.AccountAddressEdit400ApplicationJSON2)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+
 }
 
 type AccountAddressEditResponse struct {

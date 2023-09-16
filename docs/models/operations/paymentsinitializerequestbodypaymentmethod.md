@@ -1,11 +1,9 @@
 # PaymentsInitializeRequestBodyPaymentMethod
 
 
-## Supported Types
+## Fields
 
-### PaymentsInitializeRequestBodyPaymentMethod1
-
-```go
-paymentsInitializeRequestBodyPaymentMethod := operations.CreatePaymentsInitializeRequestBodyPaymentMethodPaymentsInitializeRequestBodyPaymentMethod1(operations.PaymentsInitializeRequestBodyPaymentMethod1{/* values here */})
-```
-
+| Field                                                                                                                     | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               | Example                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `DotTag`                                                                                                                  | [PaymentsInitializeRequestBodyPaymentMethodTag](../../models/operations/paymentsinitializerequestbodypaymentmethodtag.md) | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       | saved_payment_method                                                                                                      |
+| `ID`                                                                                                                      | *string*                                                                                                                  | :heavy_check_mark:                                                                                                        | Payment ID of the saved Bolt Payment method.                                                                              | id                                                                                                                        |

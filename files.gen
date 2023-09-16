@@ -102,8 +102,7 @@ docs/models/operations/merchantcallbacksgetresponse.md
 docs/models/operations/merchantcallbacksupdatesecurity.md
 docs/models/operations/merchantcallbacksupdaterequestbody.md
 docs/models/operations/merchantcallbacksupdaterequest.md
-docs/models/operations/merchantcallbacksupdate400applicationjson1tag.md
-docs/models/operations/merchantcallbacksupdate400applicationjson1.md
+docs/models/operations/merchantcallbacksupdate400applicationjsontag.md
 docs/models/operations/merchantcallbacksupdate400applicationjson.md
 docs/models/operations/merchantcallbacksupdateresponse.md
 docs/models/operations/merchantidentifiersgetsecurity.md
@@ -111,8 +110,7 @@ docs/models/operations/merchantidentifiersget200applicationjsonmerchantdivisions
 docs/models/operations/merchantidentifiersget200applicationjson.md
 docs/models/operations/merchantidentifiersgetresponse.md
 docs/models/operations/guestpaymentsinitializesecurity.md
-docs/models/operations/guestpaymentsinitializerequestbodypaymentmethod1tag.md
-docs/models/operations/guestpaymentsinitializerequestbodypaymentmethod1.md
+docs/models/operations/guestpaymentsinitializerequestbodypaymentmethodtag.md
 docs/models/operations/guestpaymentsinitializerequestbodypaymentmethod.md
 docs/models/operations/guestpaymentsinitializerequestbody.md
 docs/models/operations/guestpaymentsinitializerequest.md
@@ -124,8 +122,7 @@ docs/models/operations/paymentsinitializerequestbodycartitems.md
 docs/models/operations/paymentsinitializerequestbodycartshipmentsaddressinput.md
 docs/models/operations/paymentsinitializerequestbodycartshipments.md
 docs/models/operations/paymentsinitializerequestbodycart.md
-docs/models/operations/paymentsinitializerequestbodypaymentmethod1tag.md
-docs/models/operations/paymentsinitializerequestbodypaymentmethod1.md
+docs/models/operations/paymentsinitializerequestbodypaymentmethodtag.md
 docs/models/operations/paymentsinitializerequestbodypaymentmethod.md
 docs/models/operations/paymentsinitializerequestbody.md
 docs/models/operations/paymentsinitializerequest.md

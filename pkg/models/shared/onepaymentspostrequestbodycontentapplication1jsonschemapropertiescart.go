@@ -216,7 +216,8 @@ func (u OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShi
 		return json.Marshal(u.AddressExplicitInput)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+
 }
 
 type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipments struct {

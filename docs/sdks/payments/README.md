@@ -82,7 +82,11 @@ func main() {
                     },
                 },
             },
-            PaymentMethod: operations.GuestPaymentsInitializeRequestBodyPaymentMethod{},
+            PaymentMethod: operations.GuestPaymentsInitializeRequestBodyPaymentMethod{
+                DotTag: operations.GuestPaymentsInitializeRequestBodyPaymentMethodTagPaypal,
+                Cancel: "www.example.com/handle_paypal_cancel",
+                Success: "www.example.com/handle_paypal_success",
+            },
         },
         XPublishableKey: "error",
     }, operationSecurity)
@@ -182,7 +186,10 @@ func main() {
                     },
                 },
             },
-            PaymentMethod: operations.PaymentsInitializeRequestBodyPaymentMethod{},
+            PaymentMethod: operations.PaymentsInitializeRequestBodyPaymentMethod{
+                DotTag: operations.PaymentsInitializeRequestBodyPaymentMethodTagSavedPaymentMethod,
+                ID: "id",
+            },
         },
         XPublishableKey: "deserunt",
     }, operationSecurity)

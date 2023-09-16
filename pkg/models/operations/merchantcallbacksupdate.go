@@ -3,9 +3,7 @@
 package operations
 
 import (
-	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"net/http"
@@ -197,96 +195,53 @@ func (o *MerchantCallbacksUpdateRequest) GetXPublishableKey() string {
 	return o.XPublishableKey
 }
 
-// MerchantCallbacksUpdate400ApplicationJSON1Tag - The type of error returned
-type MerchantCallbacksUpdate400ApplicationJSON1Tag string
+// MerchantCallbacksUpdate400ApplicationJSONTag - The type of error returned
+type MerchantCallbacksUpdate400ApplicationJSONTag string
 
 const (
-	MerchantCallbacksUpdate400ApplicationJSON1TagInvalidURL MerchantCallbacksUpdate400ApplicationJSON1Tag = "invalid_url"
+	MerchantCallbacksUpdate400ApplicationJSONTagInvalidURL MerchantCallbacksUpdate400ApplicationJSONTag = "invalid_url"
 )
 
-func (e MerchantCallbacksUpdate400ApplicationJSON1Tag) ToPointer() *MerchantCallbacksUpdate400ApplicationJSON1Tag {
+func (e MerchantCallbacksUpdate400ApplicationJSONTag) ToPointer() *MerchantCallbacksUpdate400ApplicationJSONTag {
 	return &e
 }
 
-func (e *MerchantCallbacksUpdate400ApplicationJSON1Tag) UnmarshalJSON(data []byte) error {
+func (e *MerchantCallbacksUpdate400ApplicationJSONTag) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "invalid_url":
-		*e = MerchantCallbacksUpdate400ApplicationJSON1Tag(v)
+		*e = MerchantCallbacksUpdate400ApplicationJSONTag(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for MerchantCallbacksUpdate400ApplicationJSON1Tag: %v", v)
+		return fmt.Errorf("invalid value for MerchantCallbacksUpdate400ApplicationJSONTag: %v", v)
 	}
 }
 
-type MerchantCallbacksUpdate400ApplicationJSON1 struct {
+// MerchantCallbacksUpdate400ApplicationJSON - The request is missing required fields, or its fields have invalid values
+type MerchantCallbacksUpdate400ApplicationJSON struct {
 	// The type of error returned
-	DotTag MerchantCallbacksUpdate400ApplicationJSON1Tag `json:".tag"`
+	DotTag MerchantCallbacksUpdate400ApplicationJSONTag `json:".tag"`
 	// A human-readable error message, which might include information specific to
 	// the request that was made.
 	//
 	Message string `json:"message"`
 }
 
-func (o *MerchantCallbacksUpdate400ApplicationJSON1) GetDotTag() MerchantCallbacksUpdate400ApplicationJSON1Tag {
+func (o *MerchantCallbacksUpdate400ApplicationJSON) GetDotTag() MerchantCallbacksUpdate400ApplicationJSONTag {
 	if o == nil {
-		return MerchantCallbacksUpdate400ApplicationJSON1Tag("")
+		return MerchantCallbacksUpdate400ApplicationJSONTag("")
 	}
 	return o.DotTag
 }
 
-func (o *MerchantCallbacksUpdate400ApplicationJSON1) GetMessage() string {
+func (o *MerchantCallbacksUpdate400ApplicationJSON) GetMessage() string {
 	if o == nil {
 		return ""
 	}
 	return o.Message
-}
-
-type MerchantCallbacksUpdate400ApplicationJSONType string
-
-const (
-	MerchantCallbacksUpdate400ApplicationJSONTypeMerchantCallbacksUpdate400ApplicationJSON1 MerchantCallbacksUpdate400ApplicationJSONType = "merchantCallbacksUpdate_400ApplicationJSON_1"
-)
-
-type MerchantCallbacksUpdate400ApplicationJSON struct {
-	MerchantCallbacksUpdate400ApplicationJSON1 *MerchantCallbacksUpdate400ApplicationJSON1
-
-	Type MerchantCallbacksUpdate400ApplicationJSONType
-}
-
-func CreateMerchantCallbacksUpdate400ApplicationJSONMerchantCallbacksUpdate400ApplicationJSON1(merchantCallbacksUpdate400ApplicationJSON1 MerchantCallbacksUpdate400ApplicationJSON1) MerchantCallbacksUpdate400ApplicationJSON {
-	typ := MerchantCallbacksUpdate400ApplicationJSONTypeMerchantCallbacksUpdate400ApplicationJSON1
-
-	return MerchantCallbacksUpdate400ApplicationJSON{
-		MerchantCallbacksUpdate400ApplicationJSON1: &merchantCallbacksUpdate400ApplicationJSON1,
-		Type: typ,
-	}
-}
-
-func (u *MerchantCallbacksUpdate400ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	merchantCallbacksUpdate400ApplicationJSON1 := new(MerchantCallbacksUpdate400ApplicationJSON1)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&merchantCallbacksUpdate400ApplicationJSON1); err == nil {
-		u.MerchantCallbacksUpdate400ApplicationJSON1 = merchantCallbacksUpdate400ApplicationJSON1
-		u.Type = MerchantCallbacksUpdate400ApplicationJSONTypeMerchantCallbacksUpdate400ApplicationJSON1
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u MerchantCallbacksUpdate400ApplicationJSON) MarshalJSON() ([]byte, error) {
-	if u.MerchantCallbacksUpdate400ApplicationJSON1 != nil {
-		return json.Marshal(u.MerchantCallbacksUpdate400ApplicationJSON1)
-	}
-
-	return nil, nil
 }
 
 type MerchantCallbacksUpdateResponse struct {
@@ -294,7 +249,7 @@ type MerchantCallbacksUpdateResponse struct {
 	StatusCode  int
 	RawResponse *http.Response
 	// The request is missing required fields, or its fields have invalid values
-	MerchantCallbacksUpdate400ApplicationJSONOneOf *MerchantCallbacksUpdate400ApplicationJSON
+	MerchantCallbacksUpdate400ApplicationJSONObject *MerchantCallbacksUpdate400ApplicationJSON
 	// Callbacks URLs were successfully updated
 	Onemerchant1callbacksPatchRequestBodyContentApplication1jsonSchema *shared.Onemerchant1callbacksPatchRequestBodyContentApplication1jsonSchema
 }
@@ -320,11 +275,11 @@ func (o *MerchantCallbacksUpdateResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *MerchantCallbacksUpdateResponse) GetMerchantCallbacksUpdate400ApplicationJSONOneOf() *MerchantCallbacksUpdate400ApplicationJSON {
+func (o *MerchantCallbacksUpdateResponse) GetMerchantCallbacksUpdate400ApplicationJSONObject() *MerchantCallbacksUpdate400ApplicationJSON {
 	if o == nil {
 		return nil
 	}
-	return o.MerchantCallbacksUpdate400ApplicationJSONOneOf
+	return o.MerchantCallbacksUpdate400ApplicationJSONObject
 }
 
 func (o *MerchantCallbacksUpdateResponse) GetOnemerchant1callbacksPatchRequestBodyContentApplication1jsonSchema() *shared.Onemerchant1callbacksPatchRequestBodyContentApplication1jsonSchema {

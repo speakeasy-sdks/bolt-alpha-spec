@@ -154,7 +154,7 @@ func (s *configuration) MerchantCallbacksUpdate(ctx context.Context, request ope
 				return nil, err
 			}
 
-			res.MerchantCallbacksUpdate400ApplicationJSONOneOf = out
+			res.MerchantCallbacksUpdate400ApplicationJSONObject = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
