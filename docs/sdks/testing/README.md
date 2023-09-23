@@ -25,25 +25,27 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/types"
 )
 
 func main() {
-    s := boltalpha.New()
-    operationSecurity := operations.TestingAccountCreateSecurity{
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
             APIKey: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Testing.TestingAccountCreate(ctx, operations.TestingAccountCreateRequestBodyInput{
         DeactivateAt: types.MustTimeFromString("2017-07-21T17:32:28Z"),
         EmailState: operations.TestingAccountCreateRequestBodyEmailStateUnverified,
-        HasAddress: boltalpha.Bool(true),
-        IsMigrated: boltalpha.Bool(true),
+        HasAddress: boltalphaspec.Bool(true),
+        IsMigrated: boltalphaspec.Bool(true),
         PhoneState: operations.TestingAccountCreateRequestBodyPhoneStateVerified,
-    }, operationSecurity)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -60,7 +62,6 @@ func main() {
 | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
 | `request`                                                                                                          | [operations.TestingAccountCreateRequestBodyInput](../../models/operations/testingaccountcreaterequestbodyinput.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
-| `security`                                                                                                         | [operations.TestingAccountCreateSecurity](../../models/operations/testingaccountcreatesecurity.md)                 | :heavy_check_mark:                                                                                                 | The security requirements to use for the request.                                                                  |
 
 
 ### Response
@@ -82,18 +83,19 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 )
 
 func main() {
-    s := boltalpha.New()
-    operationSecurity := operations.TestingCreditCardGetSecurity{
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
             APIKey: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
-    res, err := s.Testing.TestingCreditCardGet(ctx, operationSecurity)
+    res, err := s.Testing.TestingCreditCardGet(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -106,10 +108,9 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
-| `security`                                                                                         | [operations.TestingCreditCardGetSecurity](../../models/operations/testingcreditcardgetsecurity.md) | :heavy_check_mark:                                                                                 | The security requirements to use for the request.                                                  |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
 
 
 ### Response
@@ -132,16 +133,18 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/types"
 )
 
 func main() {
-    s := boltalpha.New()
-    operationSecurity := operations.TestingShipmentTrackingCreateSecurity{
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
             APIKey: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Testing.TestingShipmentTrackingCreate(ctx, operations.TestingShipmentTrackingCreateRequestBody{
@@ -149,17 +152,17 @@ func main() {
         Status: operations.TestingShipmentTrackingCreateRequestBodyStatusInTransit,
         TrackingDetails: []TestingShipmentTrackingCreateRequestBodyTrackingDetails{
             operations.TestingShipmentTrackingCreateRequestBodyTrackingDetails{
-                CountryCode: boltalpha.String("US"),
-                EventDate: boltalpha.String("2014-08-21:T14:24:00Z"),
-                Locality: boltalpha.String("San Francisco"),
-                Message: boltalpha.String("Billing information received"),
-                PostalCode: boltalpha.String("94105"),
-                Region: boltalpha.String("CA"),
+                CountryCode: boltalphaspec.String("US"),
+                EventDate: boltalphaspec.String("2014-08-21:T14:24:00Z"),
+                Locality: boltalphaspec.String("San Francisco"),
+                Message: boltalphaspec.String("Billing information received"),
+                PostalCode: boltalphaspec.String("94105"),
+                Region: boltalphaspec.String("CA"),
                 Status: operations.TestingShipmentTrackingCreateRequestBodyTrackingDetailsStatusPreTransit.ToPointer(),
             },
         },
         TrackingNumber: "MockBolt-143292",
-    }, operationSecurity)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -176,7 +179,6 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `request`                                                                                                                  | [operations.TestingShipmentTrackingCreateRequestBody](../../models/operations/testingshipmenttrackingcreaterequestbody.md) | :heavy_check_mark:                                                                                                         | The request object to use for the request.                                                                                 |
-| `security`                                                                                                                 | [operations.TestingShipmentTrackingCreateSecurity](../../models/operations/testingshipmenttrackingcreatesecurity.md)       | :heavy_check_mark:                                                                                                         | The security requirements to use for the request.                                                                          |
 
 
 ### Response
