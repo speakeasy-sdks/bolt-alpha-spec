@@ -5,6 +5,7 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"time"
 )
 
@@ -76,6 +77,17 @@ type Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput struc
 	OtpCode      string                                                                    `json:"otp_code"`
 	Phone        string                                                                    `json:"phone"`
 	PhoneState   Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaPhoneState `json:"phone_state"`
+}
+
+func (o Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(o, "", false)
+}
+
+func (o *Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &o, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput) GetDeactivateAt() time.Time {

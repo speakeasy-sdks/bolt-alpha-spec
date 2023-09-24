@@ -8,17 +8,6 @@ import (
 	"net/http"
 )
 
-type TestingCreditCardGetSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *TestingCreditCardGetSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
-
 // TestingCreditCardGet200ApplicationJSONNetwork - The credit card network.
 type TestingCreditCardGet200ApplicationJSONNetwork string
 
