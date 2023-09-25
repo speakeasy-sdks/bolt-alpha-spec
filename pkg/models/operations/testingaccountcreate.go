@@ -6,20 +6,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 	"time"
 )
-
-type TestingAccountCreateSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *TestingAccountCreateSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
 
 type TestingAccountCreateRequestBodyEmailState string
 
@@ -87,6 +77,17 @@ type TestingAccountCreateRequestBodyInput struct {
 	HasAddress   *bool                                     `json:"has_address,omitempty"`
 	IsMigrated   *bool                                     `json:"is_migrated,omitempty"`
 	PhoneState   TestingAccountCreateRequestBodyPhoneState `json:"phone_state"`
+}
+
+func (t TestingAccountCreateRequestBodyInput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TestingAccountCreateRequestBodyInput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *TestingAccountCreateRequestBodyInput) GetDeactivateAt() time.Time {
