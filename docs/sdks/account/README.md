@@ -31,13 +31,13 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 )
 
 func main() {
-    s := boltalpha.New()
+    s := boltalphaspec.New()
     operationSecurity := operations.AccountAddPaymentMethodSecurity{
             APIKey: "",
             Oauth: "",
@@ -54,7 +54,7 @@ func main() {
             Token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
             Type: operations.AccountAddPaymentMethodRequestBodyTypeCredit,
         },
-        XPublishableKey: "provident",
+        XPublishableKey: "distinctio",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
@@ -92,12 +92,12 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 )
 
 func main() {
-    s := boltalpha.New()
+    s := boltalphaspec.New()
     operationSecurity := operations.AccountAddressCreateSecurity{
             APIKey: "",
             Oauth: "",
@@ -106,20 +106,20 @@ func main() {
     ctx := context.Background()
     res, err := s.Account.AccountAddressCreate(ctx, operations.AccountAddressCreateRequest{
         RequestBody: operations.AccountAddressCreateRequestBodyInput{
-            Company: boltalpha.String("ACME Corporation"),
+            Company: boltalphaspec.String("ACME Corporation"),
             CountryCode: "US",
-            Email: boltalpha.String("alice@example.com"),
+            Email: boltalphaspec.String("alice@example.com"),
             FirstName: "Alice",
-            IsDefault: boltalpha.Bool(true),
+            IsDefault: boltalphaspec.Bool(true),
             LastName: "Baker",
             Locality: "San Francisco",
-            Phone: boltalpha.String("+14155550199"),
+            Phone: boltalphaspec.String("+14155550199"),
             PostalCode: "94105",
-            Region: boltalpha.String("CA"),
+            Region: boltalphaspec.String("CA"),
             StreetAddress1: "535 Mission St, Ste 1401",
-            StreetAddress2: boltalpha.String("c/o Shipping Department"),
+            StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
         },
-        XPublishableKey: "distinctio",
+        XPublishableKey: "quibusdam",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
@@ -159,21 +159,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 )
 
 func main() {
-    s := boltalpha.New()
-    operationSecurity := operations.AccountAddressDeleteSecurity{
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
             APIKey: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Account.AccountAddressDelete(ctx, operations.AccountAddressDeleteRequest{
-        XPublishableKey: "quibusdam",
+        XPublishableKey: "unde",
         ID: "D4g3h5tBuVYK9",
-    }, operationSecurity)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -186,11 +188,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
-| `request`                                                                                          | [operations.AccountAddressDeleteRequest](../../models/operations/accountaddressdeleterequest.md)   | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
-| `security`                                                                                         | [operations.AccountAddressDeleteSecurity](../../models/operations/accountaddressdeletesecurity.md) | :heavy_check_mark:                                                                                 | The security requirements to use for the request.                                                  |
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `request`                                                                                        | [operations.AccountAddressDeleteRequest](../../models/operations/accountaddressdeleterequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
 
 
 ### Response
@@ -213,13 +214,13 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 )
 
 func main() {
-    s := boltalpha.New()
+    s := boltalphaspec.New()
     operationSecurity := operations.AccountAddressEditSecurity{
             APIKey: "",
             Oauth: "",
@@ -227,21 +228,21 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Account.AccountAddressEdit(ctx, operations.AccountAddressEditRequest{
-        XPublishableKey: "unde",
+        XPublishableKey: "nulla",
         ID: "D4g3h5tBuVYK9",
         Oneaccount1addressesPostRequestBodyContentApplication1jsonSchemaInput: shared.Oneaccount1addressesPostRequestBodyContentApplication1jsonSchemaInput{
-            Company: boltalpha.String("ACME Corporation"),
+            Company: boltalphaspec.String("ACME Corporation"),
             CountryCode: "US",
-            Email: boltalpha.String("alice@example.com"),
+            Email: boltalphaspec.String("alice@example.com"),
             FirstName: "Alice",
-            IsDefault: boltalpha.Bool(true),
+            IsDefault: boltalphaspec.Bool(true),
             LastName: "Baker",
             Locality: "San Francisco",
-            Phone: boltalpha.String("+14155550199"),
+            Phone: boltalphaspec.String("+14155550199"),
             PostalCode: "94105",
-            Region: boltalpha.String("CA"),
+            Region: boltalphaspec.String("CA"),
             StreetAddress1: "535 Mission St, Ste 1401",
-            StreetAddress2: boltalpha.String("c/o Shipping Department"),
+            StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
         },
     }, operationSecurity)
     if err != nil {
@@ -280,16 +281,21 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 )
 
 func main() {
-    s := boltalpha.New()
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
+            APIKey: "",
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Account.AccountExists(ctx, operations.AccountExistsRequest{
-        XPublishableKey: "nulla",
+        XPublishableKey: "corrupti",
         Identifier: operations.AccountExistsIdentifier{
             IdentifierType: operations.AccountExistsIdentifierIdentifierTypeEmail,
             IdentifierValue: "alice@example.com",
@@ -330,12 +336,12 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 )
 
 func main() {
-    s := boltalpha.New()
+    s := boltalphaspec.New()
     operationSecurity := operations.AccountGetSecurity{
             APIKey: "",
             Oauth: "",
@@ -343,7 +349,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Account.AccountGet(ctx, operations.AccountGetRequest{
-        XPublishableKey: "corrupti",
+        XPublishableKey: "illum",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)

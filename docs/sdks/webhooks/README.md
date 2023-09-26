@@ -26,24 +26,25 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/callbacks"
 	"net/http"
 )
 
 func main() {
-    s := boltalpha.New()
-    operationSecurity := operations.WebhooksCreateSecurity{
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
             APIKey: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Webhooks.WebhooksCreate(ctx, operations.WebhooksCreateRequestBodyInput{
         Event: operations.WebhooksCreateRequestBodyEvent{},
         URL: "https://www.example.com/webhook",
-    }, operationSecurity)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -60,7 +61,6 @@ func main() {
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
 | `request`                                                                                              | [operations.WebhooksCreateRequestBodyInput](../../models/operations/webhookscreaterequestbodyinput.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
-| `security`                                                                                             | [operations.WebhooksCreateSecurity](../../models/operations/webhookscreatesecurity.md)                 | :heavy_check_mark:                                                                                     | The security requirements to use for the request.                                                      |
 
 
 ### Response
@@ -80,20 +80,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 )
 
 func main() {
-    s := boltalpha.New()
-    operationSecurity := operations.WebhooksDeleteSecurity{
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
             APIKey: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Webhooks.WebhooksDelete(ctx, operations.WebhooksDeleteRequest{
         ID: "wh_za7VbYcSQU2zRgGQXQAm-g",
-    }, operationSecurity)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -106,11 +108,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.WebhooksDeleteRequest](../../models/operations/webhooksdeleterequest.md)   | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `security`                                                                             | [operations.WebhooksDeleteSecurity](../../models/operations/webhooksdeletesecurity.md) | :heavy_check_mark:                                                                     | The security requirements to use for the request.                                      |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.WebhooksDeleteRequest](../../models/operations/webhooksdeleterequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
@@ -130,20 +131,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 )
 
 func main() {
-    s := boltalpha.New()
-    operationSecurity := operations.WebhooksGetSecurity{
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
             APIKey: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Webhooks.WebhooksGet(ctx, operations.WebhooksGetRequest{
         ID: "wh_za7VbYcSQU2zRgGQXQAm-g",
-    }, operationSecurity)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -156,11 +159,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.WebhooksGetRequest](../../models/operations/webhooksgetrequest.md)   | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `security`                                                                       | [operations.WebhooksGetSecurity](../../models/operations/webhooksgetsecurity.md) | :heavy_check_mark:                                                               | The security requirements to use for the request.                                |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [operations.WebhooksGetRequest](../../models/operations/webhooksgetrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
@@ -180,20 +182,22 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 )
 
 func main() {
-    s := boltalpha.New()
-    operationSecurity := operations.WebhooksGetAllSecurity{
+    s := boltalphaspec.New(
+        boltalphaspec.WithSecurity(shared.Security{
             APIKey: "",
-        }
+        }),
+    )
 
     ctx := context.Background()
     res, err := s.Webhooks.WebhooksGetAll(ctx, operations.WebhooksGetAllRequest{
-        XPublishableKey: "suscipit",
-    }, operationSecurity)
+        XPublishableKey: "iure",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -206,11 +210,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.WebhooksGetAllRequest](../../models/operations/webhooksgetallrequest.md)   | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `security`                                                                             | [operations.WebhooksGetAllSecurity](../../models/operations/webhooksgetallsecurity.md) | :heavy_check_mark:                                                                     | The security requirements to use for the request.                                      |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.WebhooksGetAllRequest](../../models/operations/webhooksgetallrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
