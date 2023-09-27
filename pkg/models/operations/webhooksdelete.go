@@ -6,17 +6,6 @@ import (
 	"net/http"
 )
 
-type WebhooksDeleteSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *WebhooksDeleteSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
-
 type WebhooksDeleteRequest struct {
 	// The ID of the webhook to delete
 	ID string `pathParam:"style=simple,explode=false,name=id"`
@@ -54,8 +43,11 @@ func (o *WebhooksDelete422ApplicationJSON) GetMessage() string {
 }
 
 type WebhooksDeleteResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// An error has occured, e.g. the identifier is not associated with an existing Bolt account
 	WebhooksDelete422ApplicationJSONObject *WebhooksDelete422ApplicationJSON
