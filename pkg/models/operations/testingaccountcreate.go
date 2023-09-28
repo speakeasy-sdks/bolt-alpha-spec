@@ -6,20 +6,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 	"time"
 )
-
-type TestingAccountCreateSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *TestingAccountCreateSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
 
 type TestingAccountCreateRequestBodyEmailState string
 
@@ -89,6 +79,17 @@ type TestingAccountCreateRequestBodyInput struct {
 	PhoneState   TestingAccountCreateRequestBodyPhoneState `json:"phone_state"`
 }
 
+func (t TestingAccountCreateRequestBodyInput) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TestingAccountCreateRequestBodyInput) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o *TestingAccountCreateRequestBodyInput) GetDeactivateAt() time.Time {
 	if o == nil {
 		return time.Time{}
@@ -125,8 +126,11 @@ func (o *TestingAccountCreateRequestBodyInput) GetPhoneState() TestingAccountCre
 }
 
 type TestingAccountCreateResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The account was successfully created
 	Onetesting1accountsPostRequestBodyContentApplication1jsonSchema *shared.Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput
