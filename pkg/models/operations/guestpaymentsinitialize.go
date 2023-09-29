@@ -3,60 +3,32 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
 
-type GuestPaymentsInitializeSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *GuestPaymentsInitializeSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
-
-type GuestPaymentsInitializeRequestBodyPaymentMethodTag string
-
-const (
-	GuestPaymentsInitializeRequestBodyPaymentMethodTagPaypal GuestPaymentsInitializeRequestBodyPaymentMethodTag = "paypal"
-)
-
-func (e GuestPaymentsInitializeRequestBodyPaymentMethodTag) ToPointer() *GuestPaymentsInitializeRequestBodyPaymentMethodTag {
-	return &e
-}
-
-func (e *GuestPaymentsInitializeRequestBodyPaymentMethodTag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "paypal":
-		*e = GuestPaymentsInitializeRequestBodyPaymentMethodTag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for GuestPaymentsInitializeRequestBodyPaymentMethodTag: %v", v)
-	}
-}
-
 type GuestPaymentsInitializeRequestBodyPaymentMethod struct {
-	DotTag GuestPaymentsInitializeRequestBodyPaymentMethodTag `json:".tag"`
+	dotTag string `const:"paypal" json:".tag"`
 	// Redirect URL for canceled PayPal transaction.
 	Cancel string `json:"cancel"`
 	// Redirect URL for successful PayPal transaction.
 	Success string `json:"success"`
 }
 
-func (o *GuestPaymentsInitializeRequestBodyPaymentMethod) GetDotTag() GuestPaymentsInitializeRequestBodyPaymentMethodTag {
-	if o == nil {
-		return GuestPaymentsInitializeRequestBodyPaymentMethodTag("")
+func (g GuestPaymentsInitializeRequestBodyPaymentMethod) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GuestPaymentsInitializeRequestBodyPaymentMethod) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
 	}
-	return o.DotTag
+	return nil
+}
+
+func (o *GuestPaymentsInitializeRequestBodyPaymentMethod) GetDotTag() string {
+	return "paypal"
 }
 
 func (o *GuestPaymentsInitializeRequestBodyPaymentMethod) GetCancel() string {
@@ -113,8 +85,11 @@ func (o *GuestPaymentsInitializeRequest) GetXPublishableKey() string {
 }
 
 type GuestPaymentsInitializeResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Payment token retrieved
 	OnepaymentsPostResponses200ContentApplication1jsonSchema *shared.OnepaymentsPostResponses200ContentApplication1jsonSchema

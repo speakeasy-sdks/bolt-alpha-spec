@@ -3,11 +3,11 @@
 package operations
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
 
@@ -191,7 +191,6 @@ func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(id shared.Ad
 }
 
 func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	type discriminator struct {
 		DotTag string
@@ -204,9 +203,8 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(d
 
 	switch dis.DotTag {
 	case "explicit":
-		d = json.NewDecoder(bytes.NewReader(data))
 		addressExplicitInput := new(shared.AddressExplicitInput)
-		if err := d.Decode(&addressExplicitInput); err != nil {
+		if err := utils.UnmarshalJSON(data, &addressExplicitInput, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -214,9 +212,8 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(d
 		u.Type = PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit
 		return nil
 	case "id":
-		d = json.NewDecoder(bytes.NewReader(data))
 		addressID := new(shared.AddressID)
-		if err := d.Decode(&addressID); err != nil {
+		if err := utils.UnmarshalJSON(data, &addressID, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -230,15 +227,14 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(d
 
 func (u PaymentsInitializeRequestBodyCartShipmentsAddressInput) MarshalJSON() ([]byte, error) {
 	if u.AddressID != nil {
-		return json.Marshal(u.AddressID)
+		return utils.MarshalJSON(u.AddressID, "", true)
 	}
 
 	if u.AddressExplicitInput != nil {
-		return json.Marshal(u.AddressExplicitInput)
+		return utils.MarshalJSON(u.AddressExplicitInput, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
-
 }
 
 type PaymentsInitializeRequestBodyCartShipments struct {
@@ -346,41 +342,25 @@ func (o *PaymentsInitializeRequestBodyCart) GetShipments() []PaymentsInitializeR
 	return o.Shipments
 }
 
-type PaymentsInitializeRequestBodyPaymentMethodTag string
-
-const (
-	PaymentsInitializeRequestBodyPaymentMethodTagSavedPaymentMethod PaymentsInitializeRequestBodyPaymentMethodTag = "saved_payment_method"
-)
-
-func (e PaymentsInitializeRequestBodyPaymentMethodTag) ToPointer() *PaymentsInitializeRequestBodyPaymentMethodTag {
-	return &e
-}
-
-func (e *PaymentsInitializeRequestBodyPaymentMethodTag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "saved_payment_method":
-		*e = PaymentsInitializeRequestBodyPaymentMethodTag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PaymentsInitializeRequestBodyPaymentMethodTag: %v", v)
-	}
-}
-
 type PaymentsInitializeRequestBodyPaymentMethod struct {
-	DotTag PaymentsInitializeRequestBodyPaymentMethodTag `json:".tag"`
+	dotTag string `const:"saved_payment_method" json:".tag"`
 	// Payment ID of the saved Bolt Payment method.
 	ID string `json:"id"`
 }
 
-func (o *PaymentsInitializeRequestBodyPaymentMethod) GetDotTag() PaymentsInitializeRequestBodyPaymentMethodTag {
-	if o == nil {
-		return PaymentsInitializeRequestBodyPaymentMethodTag("")
+func (p PaymentsInitializeRequestBodyPaymentMethod) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentsInitializeRequestBodyPaymentMethod) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+		return err
 	}
-	return o.DotTag
+	return nil
+}
+
+func (o *PaymentsInitializeRequestBodyPaymentMethod) GetDotTag() string {
+	return "saved_payment_method"
 }
 
 func (o *PaymentsInitializeRequestBodyPaymentMethod) GetID() string {
@@ -572,8 +552,11 @@ func (o *PaymentsInitialize200ApplicationJSON) GetStatus() *PaymentsInitialize20
 }
 
 type PaymentsInitializeResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Payment token retrieved
 	PaymentsInitialize200ApplicationJSONObject *PaymentsInitialize200ApplicationJSON
