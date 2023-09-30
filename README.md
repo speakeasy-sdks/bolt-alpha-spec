@@ -10,21 +10,19 @@ go get github.com/speakeasy-sdks/bolt-alpha-spec
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```go
 package main
 
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 )
 
 func main() {
-    s := boltalpha.New()
+    s := boltalphaspec.New()
     operationSecurity := operations.AccountAddPaymentMethodSecurity{
             APIKey: "",
             Oauth: "",
@@ -41,7 +39,7 @@ func main() {
             Token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
             Type: operations.AccountAddPaymentMethodRequestBodyTypeCredit,
         },
-        XPublishableKey: "corrupti",
+        XPublishableKey: "maroon Silicon female",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
@@ -91,6 +89,38 @@ func main() {
 * [WebhooksGet](docs/sdks/webhooks/README.md#webhooksget) - Retrieve information for a specific webhook
 * [WebhooksGetAll](docs/sdks/webhooks/README.md#webhooksgetall) - Retrieve information about all existing webhooks
 <!-- End SDK Available Operations -->
+
+
+
+<!-- Start Dev Containers -->
+
+
+
+<!-- End Dev Containers -->
+
+
+
+<!-- Start Pagination -->
+# Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `nil`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+
+
+<!-- End Pagination -->
+
+
+
+<!-- Start Go Types -->
+
+<!-- End Go Types -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
 
 ### Maturity
 

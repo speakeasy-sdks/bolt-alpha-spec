@@ -3,22 +3,10 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
-
-type MerchantCallbacksUpdateSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *MerchantCallbacksUpdateSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
 
 type MerchantCallbacksUpdateRequestBody struct {
 	AccountPage                   *string `json:"account_page,omitempty"`
@@ -195,46 +183,29 @@ func (o *MerchantCallbacksUpdateRequest) GetXPublishableKey() string {
 	return o.XPublishableKey
 }
 
-// MerchantCallbacksUpdate400ApplicationJSONTag - The type of error returned
-type MerchantCallbacksUpdate400ApplicationJSONTag string
-
-const (
-	MerchantCallbacksUpdate400ApplicationJSONTagInvalidURL MerchantCallbacksUpdate400ApplicationJSONTag = "invalid_url"
-)
-
-func (e MerchantCallbacksUpdate400ApplicationJSONTag) ToPointer() *MerchantCallbacksUpdate400ApplicationJSONTag {
-	return &e
-}
-
-func (e *MerchantCallbacksUpdate400ApplicationJSONTag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "invalid_url":
-		*e = MerchantCallbacksUpdate400ApplicationJSONTag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for MerchantCallbacksUpdate400ApplicationJSONTag: %v", v)
-	}
-}
-
 // MerchantCallbacksUpdate400ApplicationJSON - The request is missing required fields, or its fields have invalid values
 type MerchantCallbacksUpdate400ApplicationJSON struct {
 	// The type of error returned
-	DotTag MerchantCallbacksUpdate400ApplicationJSONTag `json:".tag"`
+	dotTag string `const:"invalid_url" json:".tag"`
 	// A human-readable error message, which might include information specific to
 	// the request that was made.
 	//
 	Message string `json:"message"`
 }
 
-func (o *MerchantCallbacksUpdate400ApplicationJSON) GetDotTag() MerchantCallbacksUpdate400ApplicationJSONTag {
-	if o == nil {
-		return MerchantCallbacksUpdate400ApplicationJSONTag("")
+func (m MerchantCallbacksUpdate400ApplicationJSON) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *MerchantCallbacksUpdate400ApplicationJSON) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+		return err
 	}
-	return o.DotTag
+	return nil
+}
+
+func (o *MerchantCallbacksUpdate400ApplicationJSON) GetDotTag() string {
+	return "invalid_url"
 }
 
 func (o *MerchantCallbacksUpdate400ApplicationJSON) GetMessage() string {
@@ -245,8 +216,11 @@ func (o *MerchantCallbacksUpdate400ApplicationJSON) GetMessage() string {
 }
 
 type MerchantCallbacksUpdateResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The request is missing required fields, or its fields have invalid values
 	MerchantCallbacksUpdate400ApplicationJSONObject *MerchantCallbacksUpdate400ApplicationJSON

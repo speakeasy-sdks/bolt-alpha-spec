@@ -3,11 +3,9 @@
 package operations
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
-	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
 
@@ -149,45 +147,28 @@ func (o *AccountAddressCreateRequest) GetXPublishableKey() string {
 	return o.XPublishableKey
 }
 
-// AccountAddressCreate400ApplicationJSON2Tag - The type of error returned
-type AccountAddressCreate400ApplicationJSON2Tag string
-
-const (
-	AccountAddressCreate400ApplicationJSON2TagInvalidRegion AccountAddressCreate400ApplicationJSON2Tag = "invalid_region"
-)
-
-func (e AccountAddressCreate400ApplicationJSON2Tag) ToPointer() *AccountAddressCreate400ApplicationJSON2Tag {
-	return &e
-}
-
-func (e *AccountAddressCreate400ApplicationJSON2Tag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "invalid_region":
-		*e = AccountAddressCreate400ApplicationJSON2Tag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountAddressCreate400ApplicationJSON2Tag: %v", v)
-	}
-}
-
 type AccountAddressCreate400ApplicationJSON2 struct {
 	// The type of error returned
-	DotTag AccountAddressCreate400ApplicationJSON2Tag `json:".tag"`
+	dotTag string `const:"invalid_region" json:".tag"`
 	// A human-readable error message, which might include information specific to
 	// the request that was made.
 	//
 	Message string `json:"message"`
 }
 
-func (o *AccountAddressCreate400ApplicationJSON2) GetDotTag() AccountAddressCreate400ApplicationJSON2Tag {
-	if o == nil {
-		return AccountAddressCreate400ApplicationJSON2Tag("")
+func (a AccountAddressCreate400ApplicationJSON2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AccountAddressCreate400ApplicationJSON2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, true); err != nil {
+		return err
 	}
-	return o.DotTag
+	return nil
+}
+
+func (o *AccountAddressCreate400ApplicationJSON2) GetDotTag() string {
+	return "invalid_region"
 }
 
 func (o *AccountAddressCreate400ApplicationJSON2) GetMessage() string {
@@ -197,45 +178,28 @@ func (o *AccountAddressCreate400ApplicationJSON2) GetMessage() string {
 	return o.Message
 }
 
-// AccountAddressCreate400ApplicationJSON1Tag - The type of error returned
-type AccountAddressCreate400ApplicationJSON1Tag string
-
-const (
-	AccountAddressCreate400ApplicationJSON1TagInvalidPostalCode AccountAddressCreate400ApplicationJSON1Tag = "invalid_postal_code"
-)
-
-func (e AccountAddressCreate400ApplicationJSON1Tag) ToPointer() *AccountAddressCreate400ApplicationJSON1Tag {
-	return &e
-}
-
-func (e *AccountAddressCreate400ApplicationJSON1Tag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "invalid_postal_code":
-		*e = AccountAddressCreate400ApplicationJSON1Tag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountAddressCreate400ApplicationJSON1Tag: %v", v)
-	}
-}
-
 type AccountAddressCreate400ApplicationJSON1 struct {
 	// The type of error returned
-	DotTag AccountAddressCreate400ApplicationJSON1Tag `json:".tag"`
+	dotTag string `const:"invalid_postal_code" json:".tag"`
 	// A human-readable error message, which might include information specific to
 	// the request that was made.
 	//
 	Message string `json:"message"`
 }
 
-func (o *AccountAddressCreate400ApplicationJSON1) GetDotTag() AccountAddressCreate400ApplicationJSON1Tag {
-	if o == nil {
-		return AccountAddressCreate400ApplicationJSON1Tag("")
+func (a AccountAddressCreate400ApplicationJSON1) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
+}
+
+func (a *AccountAddressCreate400ApplicationJSON1) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, true); err != nil {
+		return err
 	}
-	return o.DotTag
+	return nil
+}
+
+func (o *AccountAddressCreate400ApplicationJSON1) GetDotTag() string {
+	return "invalid_postal_code"
 }
 
 func (o *AccountAddressCreate400ApplicationJSON1) GetMessage() string {
@@ -278,21 +242,16 @@ func CreateAccountAddressCreate400ApplicationJSONAccountAddressCreate400Applicat
 }
 
 func (u *AccountAddressCreate400ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	accountAddressCreate400ApplicationJSON1 := new(AccountAddressCreate400ApplicationJSON1)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&accountAddressCreate400ApplicationJSON1); err == nil {
+	if err := utils.UnmarshalJSON(data, &accountAddressCreate400ApplicationJSON1, "", true, true); err == nil {
 		u.AccountAddressCreate400ApplicationJSON1 = accountAddressCreate400ApplicationJSON1
 		u.Type = AccountAddressCreate400ApplicationJSONTypeAccountAddressCreate400ApplicationJSON1
 		return nil
 	}
 
 	accountAddressCreate400ApplicationJSON2 := new(AccountAddressCreate400ApplicationJSON2)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&accountAddressCreate400ApplicationJSON2); err == nil {
+	if err := utils.UnmarshalJSON(data, &accountAddressCreate400ApplicationJSON2, "", true, true); err == nil {
 		u.AccountAddressCreate400ApplicationJSON2 = accountAddressCreate400ApplicationJSON2
 		u.Type = AccountAddressCreate400ApplicationJSONTypeAccountAddressCreate400ApplicationJSON2
 		return nil
@@ -303,20 +262,22 @@ func (u *AccountAddressCreate400ApplicationJSON) UnmarshalJSON(data []byte) erro
 
 func (u AccountAddressCreate400ApplicationJSON) MarshalJSON() ([]byte, error) {
 	if u.AccountAddressCreate400ApplicationJSON1 != nil {
-		return json.Marshal(u.AccountAddressCreate400ApplicationJSON1)
+		return utils.MarshalJSON(u.AccountAddressCreate400ApplicationJSON1, "", true)
 	}
 
 	if u.AccountAddressCreate400ApplicationJSON2 != nil {
-		return json.Marshal(u.AccountAddressCreate400ApplicationJSON2)
+		return utils.MarshalJSON(u.AccountAddressCreate400ApplicationJSON2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
-
 }
 
 type AccountAddressCreateResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The request is missing required fields, or its fields have invalid values
 	AccountAddressCreate400ApplicationJSONOneOf *AccountAddressCreate400ApplicationJSON

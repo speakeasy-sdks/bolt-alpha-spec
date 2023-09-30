@@ -8,17 +8,6 @@ import (
 	"net/http"
 )
 
-type TestingCreditCardGetSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *TestingCreditCardGetSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
-
 // TestingCreditCardGet200ApplicationJSONNetwork - The credit card network.
 type TestingCreditCardGet200ApplicationJSONNetwork string
 
@@ -115,8 +104,11 @@ func (o *TestingCreditCardGet200ApplicationJSON) GetToken() string {
 }
 
 type TestingCreditCardGetResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Successfully generated test credit card details
 	TestingCreditCardGet200ApplicationJSONObject *TestingCreditCardGet200ApplicationJSON
