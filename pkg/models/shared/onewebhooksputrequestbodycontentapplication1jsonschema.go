@@ -3,10 +3,10 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"time"
 )
 
@@ -26,8 +26,6 @@ type OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent struct {
 
 func CreateOnewebhooksPutRequestBodyContentApplication1jsonSchemaEventGroup(group EventGroup) OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent {
 	typ := OnewebhooksPutRequestBodyContentApplication1jsonSchemaEventTypeGroup
-	typStr := EventGroupTag(typ)
-	group.DotTag = typStr
 
 	return OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent{
 		EventGroup: &group,
@@ -37,8 +35,6 @@ func CreateOnewebhooksPutRequestBodyContentApplication1jsonSchemaEventGroup(grou
 
 func CreateOnewebhooksPutRequestBodyContentApplication1jsonSchemaEventList(list EventList) OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent {
 	typ := OnewebhooksPutRequestBodyContentApplication1jsonSchemaEventTypeList
-	typStr := EventListTag(typ)
-	list.DotTag = typStr
 
 	return OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent{
 		EventList: &list,
@@ -47,7 +43,6 @@ func CreateOnewebhooksPutRequestBodyContentApplication1jsonSchemaEventList(list 
 }
 
 func (u *OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	type discriminator struct {
 		DotTag string
@@ -60,9 +55,8 @@ func (u *OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent) UnmarshalJ
 
 	switch dis.DotTag {
 	case "group":
-		d = json.NewDecoder(bytes.NewReader(data))
 		eventGroup := new(EventGroup)
-		if err := d.Decode(&eventGroup); err != nil {
+		if err := utils.UnmarshalJSON(data, &eventGroup, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -70,9 +64,8 @@ func (u *OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent) UnmarshalJ
 		u.Type = OnewebhooksPutRequestBodyContentApplication1jsonSchemaEventTypeGroup
 		return nil
 	case "list":
-		d = json.NewDecoder(bytes.NewReader(data))
 		eventList := new(EventList)
-		if err := d.Decode(&eventList); err != nil {
+		if err := utils.UnmarshalJSON(data, &eventList, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -86,15 +79,14 @@ func (u *OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent) UnmarshalJ
 
 func (u OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent) MarshalJSON() ([]byte, error) {
 	if u.EventGroup != nil {
-		return json.Marshal(u.EventGroup)
+		return utils.MarshalJSON(u.EventGroup, "", true)
 	}
 
 	if u.EventList != nil {
-		return json.Marshal(u.EventList)
+		return utils.MarshalJSON(u.EventList, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
-
 }
 
 type OnewebhooksPutRequestBodyContentApplication1jsonSchema struct {
@@ -105,6 +97,17 @@ type OnewebhooksPutRequestBodyContentApplication1jsonSchema struct {
 	ID *string `json:"id,omitempty"`
 	// The webhook's URL
 	URL string `json:"url"`
+}
+
+func (o OnewebhooksPutRequestBodyContentApplication1jsonSchema) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(o, "", false)
+}
+
+func (o *OnewebhooksPutRequestBodyContentApplication1jsonSchema) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &o, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *OnewebhooksPutRequestBodyContentApplication1jsonSchema) GetCreatedAt() *time.Time {

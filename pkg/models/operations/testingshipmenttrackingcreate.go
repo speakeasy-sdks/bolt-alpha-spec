@@ -5,20 +5,10 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 	"time"
 )
-
-type TestingShipmentTrackingCreateSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *TestingShipmentTrackingCreateSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
 
 // TestingShipmentTrackingCreateRequestBodyStatus - The shipment's status.
 type TestingShipmentTrackingCreateRequestBodyStatus string
@@ -181,6 +171,17 @@ type TestingShipmentTrackingCreateRequestBody struct {
 	TrackingNumber string `json:"tracking_number"`
 }
 
+func (t TestingShipmentTrackingCreateRequestBody) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TestingShipmentTrackingCreateRequestBody) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o *TestingShipmentTrackingCreateRequestBody) GetDeliveryDate() *time.Time {
 	if o == nil {
 		return nil
@@ -210,8 +211,11 @@ func (o *TestingShipmentTrackingCreateRequestBody) GetTrackingNumber() string {
 }
 
 type TestingShipmentTrackingCreateResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 }
 

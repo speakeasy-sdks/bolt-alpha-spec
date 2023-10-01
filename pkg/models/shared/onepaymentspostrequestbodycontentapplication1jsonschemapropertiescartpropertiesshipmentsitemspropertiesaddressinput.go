@@ -3,10 +3,10 @@
 package shared
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 )
 
 type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputType string
@@ -25,6 +25,7 @@ type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartProper
 
 func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputExplicit(explicit AddressExplicitInput) OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput {
 	typ := OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputTypeExplicit
+
 	typStr := string(typ)
 	explicit.DotTag = typStr
 
@@ -36,6 +37,7 @@ func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCart
 
 func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputID(id AddressID) OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput {
 	typ := OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputTypeID
+
 	typStr := string(typ)
 	id.DotTag = typStr
 
@@ -46,7 +48,6 @@ func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCart
 }
 
 func (u *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	type discriminator struct {
 		DotTag string
@@ -59,9 +60,8 @@ func (u *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPr
 
 	switch dis.DotTag {
 	case "explicit":
-		d = json.NewDecoder(bytes.NewReader(data))
 		addressExplicitInput := new(AddressExplicitInput)
-		if err := d.Decode(&addressExplicitInput); err != nil {
+		if err := utils.UnmarshalJSON(data, &addressExplicitInput, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -69,9 +69,8 @@ func (u *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPr
 		u.Type = OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputTypeExplicit
 		return nil
 	case "id":
-		d = json.NewDecoder(bytes.NewReader(data))
 		addressID := new(AddressID)
-		if err := d.Decode(&addressID); err != nil {
+		if err := utils.UnmarshalJSON(data, &addressID, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -85,13 +84,12 @@ func (u *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPr
 
 func (u OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput) MarshalJSON() ([]byte, error) {
 	if u.AddressID != nil {
-		return json.Marshal(u.AddressID)
+		return utils.MarshalJSON(u.AddressID, "", true)
 	}
 
 	if u.AddressExplicitInput != nil {
-		return json.Marshal(u.AddressExplicitInput)
+		return utils.MarshalJSON(u.AddressExplicitInput, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
-
 }

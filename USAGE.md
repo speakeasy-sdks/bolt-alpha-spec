@@ -7,13 +7,13 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/bolt-alpha-spec"
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 )
 
 func main() {
-    s := boltalpha.New()
+    s := boltalphaspec.New()
     operationSecurity := operations.AccountAddPaymentMethodSecurity{
             APIKey: "",
             Oauth: "",
@@ -30,7 +30,7 @@ func main() {
             Token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
             Type: operations.AccountAddPaymentMethodRequestBodyTypeCredit,
         },
-        XPublishableKey: "corrupti",
+        XPublishableKey: "maroon Silicon female",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)

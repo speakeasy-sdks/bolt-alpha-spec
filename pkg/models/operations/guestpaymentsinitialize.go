@@ -3,74 +3,88 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
+	"errors"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
 
-type GuestPaymentsInitializeSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *GuestPaymentsInitializeSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
-
-type GuestPaymentsInitializeRequestBodyPaymentMethodTag string
-
-const (
-	GuestPaymentsInitializeRequestBodyPaymentMethodTagPaypal GuestPaymentsInitializeRequestBodyPaymentMethodTag = "paypal"
-)
-
-func (e GuestPaymentsInitializeRequestBodyPaymentMethodTag) ToPointer() *GuestPaymentsInitializeRequestBodyPaymentMethodTag {
-	return &e
-}
-
-func (e *GuestPaymentsInitializeRequestBodyPaymentMethodTag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "paypal":
-		*e = GuestPaymentsInitializeRequestBodyPaymentMethodTag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for GuestPaymentsInitializeRequestBodyPaymentMethodTag: %v", v)
-	}
-}
-
-type GuestPaymentsInitializeRequestBodyPaymentMethod struct {
-	DotTag GuestPaymentsInitializeRequestBodyPaymentMethodTag `json:".tag"`
+type GuestPaymentsInitializeRequestBodyPaymentMethod1 struct {
+	dotTag string `const:"paypal" json:".tag"`
 	// Redirect URL for canceled PayPal transaction.
 	Cancel string `json:"cancel"`
 	// Redirect URL for successful PayPal transaction.
 	Success string `json:"success"`
 }
 
-func (o *GuestPaymentsInitializeRequestBodyPaymentMethod) GetDotTag() GuestPaymentsInitializeRequestBodyPaymentMethodTag {
-	if o == nil {
-		return GuestPaymentsInitializeRequestBodyPaymentMethodTag("")
-	}
-	return o.DotTag
+func (g GuestPaymentsInitializeRequestBodyPaymentMethod1) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
 }
 
-func (o *GuestPaymentsInitializeRequestBodyPaymentMethod) GetCancel() string {
+func (g *GuestPaymentsInitializeRequestBodyPaymentMethod1) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *GuestPaymentsInitializeRequestBodyPaymentMethod1) GetDotTag() string {
+	return "paypal"
+}
+
+func (o *GuestPaymentsInitializeRequestBodyPaymentMethod1) GetCancel() string {
 	if o == nil {
 		return ""
 	}
 	return o.Cancel
 }
 
-func (o *GuestPaymentsInitializeRequestBodyPaymentMethod) GetSuccess() string {
+func (o *GuestPaymentsInitializeRequestBodyPaymentMethod1) GetSuccess() string {
 	if o == nil {
 		return ""
 	}
 	return o.Success
+}
+
+type GuestPaymentsInitializeRequestBodyPaymentMethodType string
+
+const (
+	GuestPaymentsInitializeRequestBodyPaymentMethodTypeGuestPaymentsInitializeRequestBodyPaymentMethod1 GuestPaymentsInitializeRequestBodyPaymentMethodType = "guestPaymentsInitialize_requestBody_payment_method_1"
+)
+
+type GuestPaymentsInitializeRequestBodyPaymentMethod struct {
+	GuestPaymentsInitializeRequestBodyPaymentMethod1 *GuestPaymentsInitializeRequestBodyPaymentMethod1
+
+	Type GuestPaymentsInitializeRequestBodyPaymentMethodType
+}
+
+func CreateGuestPaymentsInitializeRequestBodyPaymentMethodGuestPaymentsInitializeRequestBodyPaymentMethod1(guestPaymentsInitializeRequestBodyPaymentMethod1 GuestPaymentsInitializeRequestBodyPaymentMethod1) GuestPaymentsInitializeRequestBodyPaymentMethod {
+	typ := GuestPaymentsInitializeRequestBodyPaymentMethodTypeGuestPaymentsInitializeRequestBodyPaymentMethod1
+
+	return GuestPaymentsInitializeRequestBodyPaymentMethod{
+		GuestPaymentsInitializeRequestBodyPaymentMethod1: &guestPaymentsInitializeRequestBodyPaymentMethod1,
+		Type: typ,
+	}
+}
+
+func (u *GuestPaymentsInitializeRequestBodyPaymentMethod) UnmarshalJSON(data []byte) error {
+
+	guestPaymentsInitializeRequestBodyPaymentMethod1 := new(GuestPaymentsInitializeRequestBodyPaymentMethod1)
+	if err := utils.UnmarshalJSON(data, &guestPaymentsInitializeRequestBodyPaymentMethod1, "", true, true); err == nil {
+		u.GuestPaymentsInitializeRequestBodyPaymentMethod1 = guestPaymentsInitializeRequestBodyPaymentMethod1
+		u.Type = GuestPaymentsInitializeRequestBodyPaymentMethodTypeGuestPaymentsInitializeRequestBodyPaymentMethod1
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u GuestPaymentsInitializeRequestBodyPaymentMethod) MarshalJSON() ([]byte, error) {
+	if u.GuestPaymentsInitializeRequestBodyPaymentMethod1 != nil {
+		return utils.MarshalJSON(u.GuestPaymentsInitializeRequestBodyPaymentMethod1, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type GuestPaymentsInitializeRequestBody struct {
@@ -113,8 +127,11 @@ func (o *GuestPaymentsInitializeRequest) GetXPublishableKey() string {
 }
 
 type GuestPaymentsInitializeResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Payment token retrieved
 	OnepaymentsPostResponses200ContentApplication1jsonSchema *shared.OnepaymentsPostResponses200ContentApplication1jsonSchema

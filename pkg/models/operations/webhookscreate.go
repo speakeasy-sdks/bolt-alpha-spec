@@ -3,24 +3,13 @@
 package operations
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
-
-type WebhooksCreateSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-}
-
-func (o *WebhooksCreateSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
 
 type WebhooksCreateRequestBodyEventType string
 
@@ -38,8 +27,6 @@ type WebhooksCreateRequestBodyEvent struct {
 
 func CreateWebhooksCreateRequestBodyEventGroup(group shared.EventGroup) WebhooksCreateRequestBodyEvent {
 	typ := WebhooksCreateRequestBodyEventTypeGroup
-	typStr := shared.EventGroupTag(typ)
-	group.DotTag = typStr
 
 	return WebhooksCreateRequestBodyEvent{
 		EventGroup: &group,
@@ -49,8 +36,6 @@ func CreateWebhooksCreateRequestBodyEventGroup(group shared.EventGroup) Webhooks
 
 func CreateWebhooksCreateRequestBodyEventList(list shared.EventList) WebhooksCreateRequestBodyEvent {
 	typ := WebhooksCreateRequestBodyEventTypeList
-	typStr := shared.EventListTag(typ)
-	list.DotTag = typStr
 
 	return WebhooksCreateRequestBodyEvent{
 		EventList: &list,
@@ -59,7 +44,6 @@ func CreateWebhooksCreateRequestBodyEventList(list shared.EventList) WebhooksCre
 }
 
 func (u *WebhooksCreateRequestBodyEvent) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	type discriminator struct {
 		DotTag string
@@ -72,9 +56,8 @@ func (u *WebhooksCreateRequestBodyEvent) UnmarshalJSON(data []byte) error {
 
 	switch dis.DotTag {
 	case "group":
-		d = json.NewDecoder(bytes.NewReader(data))
 		eventGroup := new(shared.EventGroup)
-		if err := d.Decode(&eventGroup); err != nil {
+		if err := utils.UnmarshalJSON(data, &eventGroup, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -82,9 +65,8 @@ func (u *WebhooksCreateRequestBodyEvent) UnmarshalJSON(data []byte) error {
 		u.Type = WebhooksCreateRequestBodyEventTypeGroup
 		return nil
 	case "list":
-		d = json.NewDecoder(bytes.NewReader(data))
 		eventList := new(shared.EventList)
-		if err := d.Decode(&eventList); err != nil {
+		if err := utils.UnmarshalJSON(data, &eventList, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -98,15 +80,14 @@ func (u *WebhooksCreateRequestBodyEvent) UnmarshalJSON(data []byte) error {
 
 func (u WebhooksCreateRequestBodyEvent) MarshalJSON() ([]byte, error) {
 	if u.EventGroup != nil {
-		return json.Marshal(u.EventGroup)
+		return utils.MarshalJSON(u.EventGroup, "", true)
 	}
 
 	if u.EventList != nil {
-		return json.Marshal(u.EventList)
+		return utils.MarshalJSON(u.EventList, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
-
 }
 
 type WebhooksCreateRequestBodyInput struct {
@@ -138,8 +119,11 @@ func (o *WebhooksCreateRequestBodyInput) GetURL() string {
 }
 
 type WebhooksCreateResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The webhook was successfully created
 	OnewebhooksPutRequestBodyContentApplication1jsonSchema *shared.OnewebhooksPutRequestBodyContentApplication1jsonSchema

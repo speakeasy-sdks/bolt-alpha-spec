@@ -3,11 +3,11 @@
 package operations
 
 import (
-	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
 
@@ -170,6 +170,7 @@ type PaymentsInitializeRequestBodyCartShipmentsAddressInput struct {
 
 func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(explicit shared.AddressExplicitInput) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
 	typ := PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit
+
 	typStr := string(typ)
 	explicit.DotTag = typStr
 
@@ -181,6 +182,7 @@ func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(explic
 
 func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(id shared.AddressID) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
 	typ := PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeID
+
 	typStr := string(typ)
 	id.DotTag = typStr
 
@@ -191,7 +193,6 @@ func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(id shared.Ad
 }
 
 func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	type discriminator struct {
 		DotTag string
@@ -204,9 +205,8 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(d
 
 	switch dis.DotTag {
 	case "explicit":
-		d = json.NewDecoder(bytes.NewReader(data))
 		addressExplicitInput := new(shared.AddressExplicitInput)
-		if err := d.Decode(&addressExplicitInput); err != nil {
+		if err := utils.UnmarshalJSON(data, &addressExplicitInput, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -214,9 +214,8 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(d
 		u.Type = PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit
 		return nil
 	case "id":
-		d = json.NewDecoder(bytes.NewReader(data))
 		addressID := new(shared.AddressID)
-		if err := d.Decode(&addressID); err != nil {
+		if err := utils.UnmarshalJSON(data, &addressID, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
@@ -230,15 +229,14 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(d
 
 func (u PaymentsInitializeRequestBodyCartShipmentsAddressInput) MarshalJSON() ([]byte, error) {
 	if u.AddressID != nil {
-		return json.Marshal(u.AddressID)
+		return utils.MarshalJSON(u.AddressID, "", true)
 	}
 
 	if u.AddressExplicitInput != nil {
-		return json.Marshal(u.AddressExplicitInput)
+		return utils.MarshalJSON(u.AddressExplicitInput, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
-
 }
 
 type PaymentsInitializeRequestBodyCartShipments struct {
@@ -346,48 +344,73 @@ func (o *PaymentsInitializeRequestBodyCart) GetShipments() []PaymentsInitializeR
 	return o.Shipments
 }
 
-type PaymentsInitializeRequestBodyPaymentMethodTag string
-
-const (
-	PaymentsInitializeRequestBodyPaymentMethodTagSavedPaymentMethod PaymentsInitializeRequestBodyPaymentMethodTag = "saved_payment_method"
-)
-
-func (e PaymentsInitializeRequestBodyPaymentMethodTag) ToPointer() *PaymentsInitializeRequestBodyPaymentMethodTag {
-	return &e
-}
-
-func (e *PaymentsInitializeRequestBodyPaymentMethodTag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "saved_payment_method":
-		*e = PaymentsInitializeRequestBodyPaymentMethodTag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PaymentsInitializeRequestBodyPaymentMethodTag: %v", v)
-	}
-}
-
-type PaymentsInitializeRequestBodyPaymentMethod struct {
-	DotTag PaymentsInitializeRequestBodyPaymentMethodTag `json:".tag"`
+type PaymentsInitializeRequestBodyPaymentMethod1 struct {
+	dotTag string `const:"saved_payment_method" json:".tag"`
 	// Payment ID of the saved Bolt Payment method.
 	ID string `json:"id"`
 }
 
-func (o *PaymentsInitializeRequestBodyPaymentMethod) GetDotTag() PaymentsInitializeRequestBodyPaymentMethodTag {
-	if o == nil {
-		return PaymentsInitializeRequestBodyPaymentMethodTag("")
-	}
-	return o.DotTag
+func (p PaymentsInitializeRequestBodyPaymentMethod1) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
 }
 
-func (o *PaymentsInitializeRequestBodyPaymentMethod) GetID() string {
+func (p *PaymentsInitializeRequestBodyPaymentMethod1) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *PaymentsInitializeRequestBodyPaymentMethod1) GetDotTag() string {
+	return "saved_payment_method"
+}
+
+func (o *PaymentsInitializeRequestBodyPaymentMethod1) GetID() string {
 	if o == nil {
 		return ""
 	}
 	return o.ID
+}
+
+type PaymentsInitializeRequestBodyPaymentMethodType string
+
+const (
+	PaymentsInitializeRequestBodyPaymentMethodTypePaymentsInitializeRequestBodyPaymentMethod1 PaymentsInitializeRequestBodyPaymentMethodType = "paymentsInitialize_requestBody_payment_method_1"
+)
+
+type PaymentsInitializeRequestBodyPaymentMethod struct {
+	PaymentsInitializeRequestBodyPaymentMethod1 *PaymentsInitializeRequestBodyPaymentMethod1
+
+	Type PaymentsInitializeRequestBodyPaymentMethodType
+}
+
+func CreatePaymentsInitializeRequestBodyPaymentMethodPaymentsInitializeRequestBodyPaymentMethod1(paymentsInitializeRequestBodyPaymentMethod1 PaymentsInitializeRequestBodyPaymentMethod1) PaymentsInitializeRequestBodyPaymentMethod {
+	typ := PaymentsInitializeRequestBodyPaymentMethodTypePaymentsInitializeRequestBodyPaymentMethod1
+
+	return PaymentsInitializeRequestBodyPaymentMethod{
+		PaymentsInitializeRequestBodyPaymentMethod1: &paymentsInitializeRequestBodyPaymentMethod1,
+		Type: typ,
+	}
+}
+
+func (u *PaymentsInitializeRequestBodyPaymentMethod) UnmarshalJSON(data []byte) error {
+
+	paymentsInitializeRequestBodyPaymentMethod1 := new(PaymentsInitializeRequestBodyPaymentMethod1)
+	if err := utils.UnmarshalJSON(data, &paymentsInitializeRequestBodyPaymentMethod1, "", true, true); err == nil {
+		u.PaymentsInitializeRequestBodyPaymentMethod1 = paymentsInitializeRequestBodyPaymentMethod1
+		u.Type = PaymentsInitializeRequestBodyPaymentMethodTypePaymentsInitializeRequestBodyPaymentMethod1
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u PaymentsInitializeRequestBodyPaymentMethod) MarshalJSON() ([]byte, error) {
+	if u.PaymentsInitializeRequestBodyPaymentMethod1 != nil {
+		return utils.MarshalJSON(u.PaymentsInitializeRequestBodyPaymentMethod1, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
 type PaymentsInitializeRequestBody struct {
@@ -572,8 +595,11 @@ func (o *PaymentsInitialize200ApplicationJSON) GetStatus() *PaymentsInitialize20
 }
 
 type PaymentsInitializeResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Payment token retrieved
 	PaymentsInitialize200ApplicationJSONObject *PaymentsInitialize200ApplicationJSON
