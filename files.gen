@@ -65,7 +65,9 @@ docs/models/operations/accountaddpaymentmethodresponse.md
 docs/models/operations/accountaddresscreatesecurity.md
 docs/models/operations/accountaddresscreaterequestbodyinput.md
 docs/models/operations/accountaddresscreaterequest.md
+docs/models/operations/accountaddresscreate400applicationjson2tag.md
 docs/models/operations/accountaddresscreate400applicationjson2.md
+docs/models/operations/accountaddresscreate400applicationjson1tag.md
 docs/models/operations/accountaddresscreate400applicationjson1.md
 docs/models/operations/accountaddresscreate400applicationjson.md
 docs/models/operations/accountaddresscreateresponse.md
@@ -74,7 +76,9 @@ docs/models/operations/accountaddressdelete422applicationjson.md
 docs/models/operations/accountaddressdeleteresponse.md
 docs/models/operations/accountaddresseditsecurity.md
 docs/models/operations/accountaddresseditrequest.md
+docs/models/operations/accountaddressedit400applicationjson2tag.md
 docs/models/operations/accountaddressedit400applicationjson2.md
+docs/models/operations/accountaddressedit400applicationjson1tag.md
 docs/models/operations/accountaddressedit400applicationjson1.md
 docs/models/operations/accountaddressedit400applicationjson.md
 docs/models/operations/accountaddresseditresponse.md
@@ -92,12 +96,14 @@ docs/models/operations/merchantcallbacksgetrequest.md
 docs/models/operations/merchantcallbacksgetresponse.md
 docs/models/operations/merchantcallbacksupdaterequestbody.md
 docs/models/operations/merchantcallbacksupdaterequest.md
+docs/models/operations/merchantcallbacksupdate400applicationjson1tag.md
 docs/models/operations/merchantcallbacksupdate400applicationjson1.md
 docs/models/operations/merchantcallbacksupdate400applicationjson.md
 docs/models/operations/merchantcallbacksupdateresponse.md
 docs/models/operations/merchantidentifiersget200applicationjsonmerchantdivisions.md
 docs/models/operations/merchantidentifiersget200applicationjson.md
 docs/models/operations/merchantidentifiersgetresponse.md
+docs/models/operations/guestpaymentsinitializerequestbodypaymentmethod1tag.md
 docs/models/operations/guestpaymentsinitializerequestbodypaymentmethod1.md
 docs/models/operations/guestpaymentsinitializerequestbodypaymentmethod.md
 docs/models/operations/guestpaymentsinitializerequestbody.md
@@ -110,6 +116,7 @@ docs/models/operations/paymentsinitializerequestbodycartitems.md
 docs/models/operations/paymentsinitializerequestbodycartshipmentsaddressinput.md
 docs/models/operations/paymentsinitializerequestbodycartshipments.md
 docs/models/operations/paymentsinitializerequestbodycart.md
+docs/models/operations/paymentsinitializerequestbodypaymentmethod1tag.md
 docs/models/operations/paymentsinitializerequestbodypaymentmethod1.md
 docs/models/operations/paymentsinitializerequestbodypaymentmethod.md
 docs/models/operations/paymentsinitializerequestbody.md
@@ -170,7 +177,10 @@ docs/models/shared/onetesting1accountspostrequestbodycontentapplication1jsonsche
 docs/models/shared/onetesting1accountspostrequestbodycontentapplication1jsonschemaoutput.md
 docs/models/shared/onewebhooksputrequestbodycontentapplication1jsonschemaevent.md
 docs/models/shared/onewebhooksputrequestbodycontentapplication1jsonschema.md
+docs/models/shared/eventgrouptag.md
+docs/models/shared/eventgroupeventgroup.md
 docs/models/shared/eventgroup.md
+docs/models/shared/eventlisttag.md
 docs/models/shared/eventlisteventlist.md
 docs/models/shared/eventlist.md
 docs/models/shared/security.md

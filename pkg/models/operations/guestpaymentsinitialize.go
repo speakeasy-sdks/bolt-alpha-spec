@@ -3,33 +3,51 @@
 package operations
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
 
+type GuestPaymentsInitializeRequestBodyPaymentMethod1Tag string
+
+const (
+	GuestPaymentsInitializeRequestBodyPaymentMethod1TagPaypal GuestPaymentsInitializeRequestBodyPaymentMethod1Tag = "paypal"
+)
+
+func (e GuestPaymentsInitializeRequestBodyPaymentMethod1Tag) ToPointer() *GuestPaymentsInitializeRequestBodyPaymentMethod1Tag {
+	return &e
+}
+
+func (e *GuestPaymentsInitializeRequestBodyPaymentMethod1Tag) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "paypal":
+		*e = GuestPaymentsInitializeRequestBodyPaymentMethod1Tag(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for GuestPaymentsInitializeRequestBodyPaymentMethod1Tag: %v", v)
+	}
+}
+
 type GuestPaymentsInitializeRequestBodyPaymentMethod1 struct {
-	dotTag string `const:"paypal" json:".tag"`
+	DotTag GuestPaymentsInitializeRequestBodyPaymentMethod1Tag `json:".tag"`
 	// Redirect URL for canceled PayPal transaction.
 	Cancel string `json:"cancel"`
 	// Redirect URL for successful PayPal transaction.
 	Success string `json:"success"`
 }
 
-func (g GuestPaymentsInitializeRequestBodyPaymentMethod1) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GuestPaymentsInitializeRequestBodyPaymentMethod1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, true); err != nil {
-		return err
+func (o *GuestPaymentsInitializeRequestBodyPaymentMethod1) GetDotTag() GuestPaymentsInitializeRequestBodyPaymentMethod1Tag {
+	if o == nil {
+		return GuestPaymentsInitializeRequestBodyPaymentMethod1Tag("")
 	}
-	return nil
-}
-
-func (o *GuestPaymentsInitializeRequestBodyPaymentMethod1) GetDotTag() string {
-	return "paypal"
+	return o.DotTag
 }
 
 func (o *GuestPaymentsInitializeRequestBodyPaymentMethod1) GetCancel() string {

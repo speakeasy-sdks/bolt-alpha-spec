@@ -170,7 +170,6 @@ type PaymentsInitializeRequestBodyCartShipmentsAddressInput struct {
 
 func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(explicit shared.AddressExplicitInput) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
 	typ := PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit
-
 	typStr := string(typ)
 	explicit.DotTag = typStr
 
@@ -182,7 +181,6 @@ func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(explic
 
 func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(id shared.AddressID) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
 	typ := PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeID
-
 	typStr := string(typ)
 	id.DotTag = typStr
 
@@ -344,25 +342,41 @@ func (o *PaymentsInitializeRequestBodyCart) GetShipments() []PaymentsInitializeR
 	return o.Shipments
 }
 
+type PaymentsInitializeRequestBodyPaymentMethod1Tag string
+
+const (
+	PaymentsInitializeRequestBodyPaymentMethod1TagSavedPaymentMethod PaymentsInitializeRequestBodyPaymentMethod1Tag = "saved_payment_method"
+)
+
+func (e PaymentsInitializeRequestBodyPaymentMethod1Tag) ToPointer() *PaymentsInitializeRequestBodyPaymentMethod1Tag {
+	return &e
+}
+
+func (e *PaymentsInitializeRequestBodyPaymentMethod1Tag) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "saved_payment_method":
+		*e = PaymentsInitializeRequestBodyPaymentMethod1Tag(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for PaymentsInitializeRequestBodyPaymentMethod1Tag: %v", v)
+	}
+}
+
 type PaymentsInitializeRequestBodyPaymentMethod1 struct {
-	dotTag string `const:"saved_payment_method" json:".tag"`
+	DotTag PaymentsInitializeRequestBodyPaymentMethod1Tag `json:".tag"`
 	// Payment ID of the saved Bolt Payment method.
 	ID string `json:"id"`
 }
 
-func (p PaymentsInitializeRequestBodyPaymentMethod1) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(p, "", false)
-}
-
-func (p *PaymentsInitializeRequestBodyPaymentMethod1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, true); err != nil {
-		return err
+func (o *PaymentsInitializeRequestBodyPaymentMethod1) GetDotTag() PaymentsInitializeRequestBodyPaymentMethod1Tag {
+	if o == nil {
+		return PaymentsInitializeRequestBodyPaymentMethod1Tag("")
 	}
-	return nil
-}
-
-func (o *PaymentsInitializeRequestBodyPaymentMethod1) GetDotTag() string {
-	return "saved_payment_method"
+	return o.DotTag
 }
 
 func (o *PaymentsInitializeRequestBodyPaymentMethod1) GetID() string {

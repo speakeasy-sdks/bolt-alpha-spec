@@ -26,6 +26,8 @@ type OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent struct {
 
 func CreateOnewebhooksPutRequestBodyContentApplication1jsonSchemaEventGroup(group EventGroup) OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent {
 	typ := OnewebhooksPutRequestBodyContentApplication1jsonSchemaEventTypeGroup
+	typStr := EventGroupTag(typ)
+	group.DotTag = typStr
 
 	return OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent{
 		EventGroup: &group,
@@ -35,6 +37,8 @@ func CreateOnewebhooksPutRequestBodyContentApplication1jsonSchemaEventGroup(grou
 
 func CreateOnewebhooksPutRequestBodyContentApplication1jsonSchemaEventList(list EventList) OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent {
 	typ := OnewebhooksPutRequestBodyContentApplication1jsonSchemaEventTypeList
+	typStr := EventListTag(typ)
+	list.DotTag = typStr
 
 	return OnewebhooksPutRequestBodyContentApplication1jsonSchemaEvent{
 		EventList: &list,

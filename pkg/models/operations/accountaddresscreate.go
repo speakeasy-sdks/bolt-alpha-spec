@@ -3,7 +3,9 @@
 package operations
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
@@ -147,28 +149,45 @@ func (o *AccountAddressCreateRequest) GetXPublishableKey() string {
 	return o.XPublishableKey
 }
 
+// AccountAddressCreate400ApplicationJSON2Tag - The type of error returned
+type AccountAddressCreate400ApplicationJSON2Tag string
+
+const (
+	AccountAddressCreate400ApplicationJSON2TagInvalidRegion AccountAddressCreate400ApplicationJSON2Tag = "invalid_region"
+)
+
+func (e AccountAddressCreate400ApplicationJSON2Tag) ToPointer() *AccountAddressCreate400ApplicationJSON2Tag {
+	return &e
+}
+
+func (e *AccountAddressCreate400ApplicationJSON2Tag) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "invalid_region":
+		*e = AccountAddressCreate400ApplicationJSON2Tag(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AccountAddressCreate400ApplicationJSON2Tag: %v", v)
+	}
+}
+
 type AccountAddressCreate400ApplicationJSON2 struct {
 	// The type of error returned
-	dotTag string `const:"invalid_region" json:".tag"`
+	DotTag AccountAddressCreate400ApplicationJSON2Tag `json:".tag"`
 	// A human-readable error message, which might include information specific to
 	// the request that was made.
 	//
 	Message string `json:"message"`
 }
 
-func (a AccountAddressCreate400ApplicationJSON2) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AccountAddressCreate400ApplicationJSON2) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, true); err != nil {
-		return err
+func (o *AccountAddressCreate400ApplicationJSON2) GetDotTag() AccountAddressCreate400ApplicationJSON2Tag {
+	if o == nil {
+		return AccountAddressCreate400ApplicationJSON2Tag("")
 	}
-	return nil
-}
-
-func (o *AccountAddressCreate400ApplicationJSON2) GetDotTag() string {
-	return "invalid_region"
+	return o.DotTag
 }
 
 func (o *AccountAddressCreate400ApplicationJSON2) GetMessage() string {
@@ -178,28 +197,45 @@ func (o *AccountAddressCreate400ApplicationJSON2) GetMessage() string {
 	return o.Message
 }
 
+// AccountAddressCreate400ApplicationJSON1Tag - The type of error returned
+type AccountAddressCreate400ApplicationJSON1Tag string
+
+const (
+	AccountAddressCreate400ApplicationJSON1TagInvalidPostalCode AccountAddressCreate400ApplicationJSON1Tag = "invalid_postal_code"
+)
+
+func (e AccountAddressCreate400ApplicationJSON1Tag) ToPointer() *AccountAddressCreate400ApplicationJSON1Tag {
+	return &e
+}
+
+func (e *AccountAddressCreate400ApplicationJSON1Tag) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "invalid_postal_code":
+		*e = AccountAddressCreate400ApplicationJSON1Tag(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AccountAddressCreate400ApplicationJSON1Tag: %v", v)
+	}
+}
+
 type AccountAddressCreate400ApplicationJSON1 struct {
 	// The type of error returned
-	dotTag string `const:"invalid_postal_code" json:".tag"`
+	DotTag AccountAddressCreate400ApplicationJSON1Tag `json:".tag"`
 	// A human-readable error message, which might include information specific to
 	// the request that was made.
 	//
 	Message string `json:"message"`
 }
 
-func (a AccountAddressCreate400ApplicationJSON1) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AccountAddressCreate400ApplicationJSON1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, true); err != nil {
-		return err
+func (o *AccountAddressCreate400ApplicationJSON1) GetDotTag() AccountAddressCreate400ApplicationJSON1Tag {
+	if o == nil {
+		return AccountAddressCreate400ApplicationJSON1Tag("")
 	}
-	return nil
-}
-
-func (o *AccountAddressCreate400ApplicationJSON1) GetDotTag() string {
-	return "invalid_postal_code"
+	return o.DotTag
 }
 
 func (o *AccountAddressCreate400ApplicationJSON1) GetMessage() string {

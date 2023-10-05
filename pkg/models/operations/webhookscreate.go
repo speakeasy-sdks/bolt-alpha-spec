@@ -27,6 +27,8 @@ type WebhooksCreateRequestBodyEvent struct {
 
 func CreateWebhooksCreateRequestBodyEventGroup(group shared.EventGroup) WebhooksCreateRequestBodyEvent {
 	typ := WebhooksCreateRequestBodyEventTypeGroup
+	typStr := shared.EventGroupTag(typ)
+	group.DotTag = typStr
 
 	return WebhooksCreateRequestBodyEvent{
 		EventGroup: &group,
@@ -36,6 +38,8 @@ func CreateWebhooksCreateRequestBodyEventGroup(group shared.EventGroup) Webhooks
 
 func CreateWebhooksCreateRequestBodyEventList(list shared.EventList) WebhooksCreateRequestBodyEvent {
 	typ := WebhooksCreateRequestBodyEventTypeList
+	typStr := shared.EventListTag(typ)
+	list.DotTag = typStr
 
 	return WebhooksCreateRequestBodyEvent{
 		EventList: &list,

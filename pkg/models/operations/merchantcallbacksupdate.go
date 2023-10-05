@@ -3,7 +3,9 @@
 package operations
 
 import (
+	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
@@ -184,28 +186,45 @@ func (o *MerchantCallbacksUpdateRequest) GetXPublishableKey() string {
 	return o.XPublishableKey
 }
 
+// MerchantCallbacksUpdate400ApplicationJSON1Tag - The type of error returned
+type MerchantCallbacksUpdate400ApplicationJSON1Tag string
+
+const (
+	MerchantCallbacksUpdate400ApplicationJSON1TagInvalidURL MerchantCallbacksUpdate400ApplicationJSON1Tag = "invalid_url"
+)
+
+func (e MerchantCallbacksUpdate400ApplicationJSON1Tag) ToPointer() *MerchantCallbacksUpdate400ApplicationJSON1Tag {
+	return &e
+}
+
+func (e *MerchantCallbacksUpdate400ApplicationJSON1Tag) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "invalid_url":
+		*e = MerchantCallbacksUpdate400ApplicationJSON1Tag(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for MerchantCallbacksUpdate400ApplicationJSON1Tag: %v", v)
+	}
+}
+
 type MerchantCallbacksUpdate400ApplicationJSON1 struct {
 	// The type of error returned
-	dotTag string `const:"invalid_url" json:".tag"`
+	DotTag MerchantCallbacksUpdate400ApplicationJSON1Tag `json:".tag"`
 	// A human-readable error message, which might include information specific to
 	// the request that was made.
 	//
 	Message string `json:"message"`
 }
 
-func (m MerchantCallbacksUpdate400ApplicationJSON1) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(m, "", false)
-}
-
-func (m *MerchantCallbacksUpdate400ApplicationJSON1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, true); err != nil {
-		return err
+func (o *MerchantCallbacksUpdate400ApplicationJSON1) GetDotTag() MerchantCallbacksUpdate400ApplicationJSON1Tag {
+	if o == nil {
+		return MerchantCallbacksUpdate400ApplicationJSON1Tag("")
 	}
-	return nil
-}
-
-func (o *MerchantCallbacksUpdate400ApplicationJSON1) GetDotTag() string {
-	return "invalid_url"
+	return o.DotTag
 }
 
 func (o *MerchantCallbacksUpdate400ApplicationJSON1) GetMessage() string {

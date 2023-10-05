@@ -149,7 +149,6 @@ type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipme
 
 func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputExplicit(explicit AddressExplicitInput) OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInput {
 	typ := OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputTypeExplicit
-
 	typStr := string(typ)
 	explicit.DotTag = typStr
 
@@ -161,7 +160,6 @@ func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCart
 
 func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputID(id AddressID) OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInput {
 	typ := OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputTypeID
-
 	typStr := string(typ)
 	id.DotTag = typStr
 
