@@ -1,4 +1,4 @@
-# AddressExplicitInput
+# PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput
 
 The Address object is used for shipping, and physical store address use cases.
 

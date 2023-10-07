@@ -9,6 +9,129 @@ import (
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 )
 
+// OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput - The Address object is used for shipping, and physical store address use cases.
+type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput struct {
+	// The type of address reference
+	DotTag         string  `json:".tag"`
+	Company        *string `json:"company,omitempty"`
+	CountryCode    string  `json:"country_code"`
+	Email          *string `json:"email,omitempty"`
+	FirstName      string  `json:"first_name"`
+	LastName       string  `json:"last_name"`
+	Locality       string  `json:"locality"`
+	Phone          *string `json:"phone,omitempty"`
+	PostalCode     string  `json:"postal_code"`
+	Region         *string `json:"region,omitempty"`
+	StreetAddress1 string  `json:"street_address1"`
+	StreetAddress2 *string `json:"street_address2,omitempty"`
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetDotTag() string {
+	if o == nil {
+		return ""
+	}
+	return o.DotTag
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetCompany() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Company
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetCountryCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.CountryCode
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetEmail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetFirstName() string {
+	if o == nil {
+		return ""
+	}
+	return o.FirstName
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetLastName() string {
+	if o == nil {
+		return ""
+	}
+	return o.LastName
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetLocality() string {
+	if o == nil {
+		return ""
+	}
+	return o.Locality
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetPhone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Phone
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetPostalCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.PostalCode
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetRegion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Region
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetStreetAddress1() string {
+	if o == nil {
+		return ""
+	}
+	return o.StreetAddress1
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) GetStreetAddress2() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StreetAddress2
+}
+
+// OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID - The Address object is used for shipping, and physical store address use cases.
+type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID struct {
+	// The type of address reference
+	DotTag string `json:".tag"`
+	// The address's ID
+	ID string `json:"id"`
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID) GetDotTag() string {
+	if o == nil {
+		return ""
+	}
+	return o.DotTag
+}
+
+func (o *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputType string
 
 const (
@@ -17,31 +140,31 @@ const (
 )
 
 type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput struct {
-	AddressID            *AddressID
-	AddressExplicitInput *AddressExplicitInput
+	OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID            *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID
+	OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput
 
 	Type OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputType
 }
 
-func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputExplicit(explicit AddressExplicitInput) OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput {
+func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputExplicit(explicit OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput) OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput {
 	typ := OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputTypeExplicit
 	typStr := string(typ)
 	explicit.DotTag = typStr
 
 	return OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput{
-		AddressExplicitInput: &explicit,
-		Type:                 typ,
+		OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput: &explicit,
+		Type: typ,
 	}
 }
 
-func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputID(id AddressID) OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput {
+func CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputID(id OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID) OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput {
 	typ := OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputTypeID
 	typStr := string(typ)
 	id.DotTag = typStr
 
 	return OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput{
-		AddressID: &id,
-		Type:      typ,
+		OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID: &id,
+		Type: typ,
 	}
 }
 
@@ -58,21 +181,21 @@ func (u *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPr
 
 	switch dis.DotTag {
 	case "explicit":
-		addressExplicitInput := new(AddressExplicitInput)
-		if err := utils.UnmarshalJSON(data, &addressExplicitInput, "", true, true); err != nil {
+		onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput := new(OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput)
+		if err := utils.UnmarshalJSON(data, &onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.AddressExplicitInput = addressExplicitInput
+		u.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput = onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput
 		u.Type = OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputTypeExplicit
 		return nil
 	case "id":
-		addressID := new(AddressID)
-		if err := utils.UnmarshalJSON(data, &addressID, "", true, true); err != nil {
+		onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID := new(OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID)
+		if err := utils.UnmarshalJSON(data, &onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.AddressID = addressID
+		u.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID = onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID
 		u.Type = OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputTypeID
 		return nil
 	}
@@ -81,12 +204,12 @@ func (u *OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPr
 }
 
 func (u OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput) MarshalJSON() ([]byte, error) {
-	if u.AddressID != nil {
-		return utils.MarshalJSON(u.AddressID, "", true)
+	if u.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID != nil {
+		return utils.MarshalJSON(u.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID, "", true)
 	}
 
-	if u.AddressExplicitInput != nil {
-		return utils.MarshalJSON(u.AddressExplicitInput, "", true)
+	if u.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput != nil {
+		return utils.MarshalJSON(u.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")

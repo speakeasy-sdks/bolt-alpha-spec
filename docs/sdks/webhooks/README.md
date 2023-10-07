@@ -31,7 +31,6 @@ import(
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/callbacks"
-	"net/http"
 )
 
 func main() {
@@ -43,7 +42,15 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Webhooks.WebhooksCreate(ctx, operations.WebhooksCreateRequestBodyInput{
-        Event: operations.WebhooksCreateRequestBodyEvent{},
+        Event: operations.CreateWebhooksCreateRequestBodyEventEventList(
+                shared.EventList{
+                    DotTag: shared.EventListTagList,
+                    EventList: []shared.EventListEventList{
+                        shared.EventListEventListAuth,
+                        shared.EventListEventListCapture,
+                    },
+                },
+        ),
         URL: "https://www.example.com/webhook",
     })
     if err != nil {

@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### AddressExplicitInput
+### PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput
 
 ```go
-paymentsInitializeRequestBodyCartShipmentsAddressInput := operations.CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(shared.AddressExplicitInput{/* values here */})
+paymentsInitializeRequestBodyCartShipmentsAddressInput := operations.CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(operations.PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput{/* values here */})
 ```
 
-### AddressID
+### PaymentsInitializeRequestBodyCartShipmentsAddressAddressID
 
 ```go
-paymentsInitializeRequestBodyCartShipmentsAddressInput := operations.CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(shared.AddressID{/* values here */})
+paymentsInitializeRequestBodyCartShipmentsAddressInput := operations.CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(operations.PaymentsInitializeRequestBodyCartShipmentsAddressAddressID{/* values here */})
 ```
 

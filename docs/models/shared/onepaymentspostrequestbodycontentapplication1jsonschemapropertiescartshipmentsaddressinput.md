@@ -3,15 +3,15 @@
 
 ## Supported Types
 
-### AddressExplicitInput
+### OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressAddressExplicitInput
 
 ```go
-onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInput := shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputExplicit(shared.AddressExplicitInput{/* values here */})
+onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInput := shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputExplicit(shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressAddressExplicitInput{/* values here */})
 ```
 
-### AddressID
+### OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressAddressID
 
 ```go
-onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInput := shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputID(shared.AddressID{/* values here */})
+onepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInput := shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputID(shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressAddressID{/* values here */})
 ```
 

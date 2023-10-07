@@ -151,7 +151,7 @@ func main() {
     res, err := s.Testing.TestingShipmentTrackingCreate(ctx, operations.TestingShipmentTrackingCreateRequestBody{
         DeliveryDate: types.MustTimeFromString("2014-08-23:T06:00:00Z"),
         Status: operations.TestingShipmentTrackingCreateRequestBodyStatusInTransit,
-        TrackingDetails: []TestingShipmentTrackingCreateRequestBodyTrackingDetails{
+        TrackingDetails: []operations.TestingShipmentTrackingCreateRequestBodyTrackingDetails{
             operations.TestingShipmentTrackingCreateRequestBodyTrackingDetails{
                 CountryCode: boltalphaspec.String("US"),
                 EventDate: boltalphaspec.String("2014-08-21:T14:24:00Z"),

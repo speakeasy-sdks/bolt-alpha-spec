@@ -154,6 +154,129 @@ func (o *PaymentsInitializeRequestBodyCartItems) GetUnitPrice() int64 {
 	return o.UnitPrice
 }
 
+// PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput - The Address object is used for shipping, and physical store address use cases.
+type PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput struct {
+	// The type of address reference
+	DotTag         string  `json:".tag"`
+	Company        *string `json:"company,omitempty"`
+	CountryCode    string  `json:"country_code"`
+	Email          *string `json:"email,omitempty"`
+	FirstName      string  `json:"first_name"`
+	LastName       string  `json:"last_name"`
+	Locality       string  `json:"locality"`
+	Phone          *string `json:"phone,omitempty"`
+	PostalCode     string  `json:"postal_code"`
+	Region         *string `json:"region,omitempty"`
+	StreetAddress1 string  `json:"street_address1"`
+	StreetAddress2 *string `json:"street_address2,omitempty"`
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetDotTag() string {
+	if o == nil {
+		return ""
+	}
+	return o.DotTag
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetCompany() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Company
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetCountryCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.CountryCode
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetEmail() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetFirstName() string {
+	if o == nil {
+		return ""
+	}
+	return o.FirstName
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetLastName() string {
+	if o == nil {
+		return ""
+	}
+	return o.LastName
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetLocality() string {
+	if o == nil {
+		return ""
+	}
+	return o.Locality
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetPhone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Phone
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetPostalCode() string {
+	if o == nil {
+		return ""
+	}
+	return o.PostalCode
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetRegion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Region
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetStreetAddress1() string {
+	if o == nil {
+		return ""
+	}
+	return o.StreetAddress1
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) GetStreetAddress2() *string {
+	if o == nil {
+		return nil
+	}
+	return o.StreetAddress2
+}
+
+// PaymentsInitializeRequestBodyCartShipmentsAddressAddressID - The Address object is used for shipping, and physical store address use cases.
+type PaymentsInitializeRequestBodyCartShipmentsAddressAddressID struct {
+	// The type of address reference
+	DotTag string `json:".tag"`
+	// The address's ID
+	ID string `json:"id"`
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressID) GetDotTag() string {
+	if o == nil {
+		return ""
+	}
+	return o.DotTag
+}
+
+func (o *PaymentsInitializeRequestBodyCartShipmentsAddressAddressID) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
 type PaymentsInitializeRequestBodyCartShipmentsAddressInputType string
 
 const (
@@ -162,31 +285,31 @@ const (
 )
 
 type PaymentsInitializeRequestBodyCartShipmentsAddressInput struct {
-	AddressID            *shared.AddressID
-	AddressExplicitInput *shared.AddressExplicitInput
+	PaymentsInitializeRequestBodyCartShipmentsAddressAddressID            *PaymentsInitializeRequestBodyCartShipmentsAddressAddressID
+	PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput
 
 	Type PaymentsInitializeRequestBodyCartShipmentsAddressInputType
 }
 
-func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(explicit shared.AddressExplicitInput) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
+func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputExplicit(explicit PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
 	typ := PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit
 	typStr := string(typ)
 	explicit.DotTag = typStr
 
 	return PaymentsInitializeRequestBodyCartShipmentsAddressInput{
-		AddressExplicitInput: &explicit,
-		Type:                 typ,
+		PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput: &explicit,
+		Type: typ,
 	}
 }
 
-func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(id shared.AddressID) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
+func CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputID(id PaymentsInitializeRequestBodyCartShipmentsAddressAddressID) PaymentsInitializeRequestBodyCartShipmentsAddressInput {
 	typ := PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeID
 	typStr := string(typ)
 	id.DotTag = typStr
 
 	return PaymentsInitializeRequestBodyCartShipmentsAddressInput{
-		AddressID: &id,
-		Type:      typ,
+		PaymentsInitializeRequestBodyCartShipmentsAddressAddressID: &id,
+		Type: typ,
 	}
 }
 
@@ -203,21 +326,21 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(d
 
 	switch dis.DotTag {
 	case "explicit":
-		addressExplicitInput := new(shared.AddressExplicitInput)
-		if err := utils.UnmarshalJSON(data, &addressExplicitInput, "", true, true); err != nil {
+		paymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput := new(PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput)
+		if err := utils.UnmarshalJSON(data, &paymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.AddressExplicitInput = addressExplicitInput
+		u.PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput = paymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput
 		u.Type = PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeExplicit
 		return nil
 	case "id":
-		addressID := new(shared.AddressID)
-		if err := utils.UnmarshalJSON(data, &addressID, "", true, true); err != nil {
+		paymentsInitializeRequestBodyCartShipmentsAddressAddressID := new(PaymentsInitializeRequestBodyCartShipmentsAddressAddressID)
+		if err := utils.UnmarshalJSON(data, &paymentsInitializeRequestBodyCartShipmentsAddressAddressID, "", true, true); err != nil {
 			return fmt.Errorf("could not unmarshal expected type: %w", err)
 		}
 
-		u.AddressID = addressID
+		u.PaymentsInitializeRequestBodyCartShipmentsAddressAddressID = paymentsInitializeRequestBodyCartShipmentsAddressAddressID
 		u.Type = PaymentsInitializeRequestBodyCartShipmentsAddressInputTypeID
 		return nil
 	}
@@ -226,12 +349,12 @@ func (u *PaymentsInitializeRequestBodyCartShipmentsAddressInput) UnmarshalJSON(d
 }
 
 func (u PaymentsInitializeRequestBodyCartShipmentsAddressInput) MarshalJSON() ([]byte, error) {
-	if u.AddressID != nil {
-		return utils.MarshalJSON(u.AddressID, "", true)
+	if u.PaymentsInitializeRequestBodyCartShipmentsAddressAddressID != nil {
+		return utils.MarshalJSON(u.PaymentsInitializeRequestBodyCartShipmentsAddressAddressID, "", true)
 	}
 
-	if u.AddressExplicitInput != nil {
-		return utils.MarshalJSON(u.AddressExplicitInput, "", true)
+	if u.PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput != nil {
+		return utils.MarshalJSON(u.PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
@@ -252,16 +375,16 @@ func (o *PaymentsInitializeRequestBodyCartShipments) GetAddress() *PaymentsIniti
 	return o.Address
 }
 
-func (o *PaymentsInitializeRequestBodyCartShipments) GetAddressExplicit() *shared.AddressExplicitInput {
+func (o *PaymentsInitializeRequestBodyCartShipments) GetAddressExplicit() *PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput {
 	if v := o.GetAddress(); v != nil {
-		return v.AddressExplicitInput
+		return v.PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput
 	}
 	return nil
 }
 
-func (o *PaymentsInitializeRequestBodyCartShipments) GetAddressID() *shared.AddressID {
+func (o *PaymentsInitializeRequestBodyCartShipments) GetAddressID() *PaymentsInitializeRequestBodyCartShipmentsAddressAddressID {
 	if v := o.GetAddress(); v != nil {
-		return v.AddressID
+		return v.PaymentsInitializeRequestBodyCartShipmentsAddressAddressID
 	}
 	return nil
 }

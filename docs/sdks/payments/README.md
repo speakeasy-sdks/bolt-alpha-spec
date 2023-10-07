@@ -74,7 +74,12 @@ func main() {
                 OrderReference: "order_100",
                 Shipments: []shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipments{
                     shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipments{
-                        Address: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInput{},
+                        Address: shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressInputOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressAddressID(
+                                shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartShipmentsAddressAddressID{
+                                    DotTag: "id",
+                                    ID: "D4g3h5tBuVYK9",
+                                },
+                        ),
                         Carrier: boltalphaspec.String("FedEx"),
                         Cost: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
                             Currency: "USD",
@@ -84,9 +89,15 @@ func main() {
                     },
                 },
             },
-            PaymentMethod: operations.GuestPaymentsInitializeRequestBodyPaymentMethod{},
+            PaymentMethod: operations.CreateGuestPaymentsInitializeRequestBodyPaymentMethodGuestPaymentsInitializeRequestBodyPaymentMethod1(
+                    operations.GuestPaymentsInitializeRequestBodyPaymentMethod1{
+                        DotTag: operations.GuestPaymentsInitializeRequestBodyPaymentMethod1TagPaypal,
+                        Cancel: "www.example.com/handle_paypal_cancel",
+                        Success: "www.example.com/handle_paypal_success",
+                    },
+            ),
         },
-        XPublishableKey: "Soap whereas input",
+        XPublishableKey: "Hyundai",
     })
     if err != nil {
         log.Fatal(err)
@@ -146,7 +157,7 @@ func main() {
                     Tax: boltalphaspec.Int64(900),
                     Total: 900,
                 },
-                Discounts: []PaymentsInitializeRequestBodyCartDiscounts{
+                Discounts: []operations.PaymentsInitializeRequestBodyCartDiscounts{
                     operations.PaymentsInitializeRequestBodyCartDiscounts{
                         Amounts: shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
                             Currency: "USD",
@@ -158,7 +169,7 @@ func main() {
                     },
                 },
                 DisplayID: boltalphaspec.String("215614191"),
-                Items: []PaymentsInitializeRequestBodyCartItems{
+                Items: []operations.PaymentsInitializeRequestBodyCartItems{
                     operations.PaymentsInitializeRequestBodyCartItems{
                         Description: boltalphaspec.String("Large tote with Bolt logo."),
                         ImageURL: boltalphaspec.String("https://www.example.com/products/123456/images/1.png"),
@@ -171,9 +182,24 @@ func main() {
                 },
                 OrderDescription: boltalphaspec.String("Order #1234567890"),
                 OrderReference: "order_100",
-                Shipments: []PaymentsInitializeRequestBodyCartShipments{
+                Shipments: []operations.PaymentsInitializeRequestBodyCartShipments{
                     operations.PaymentsInitializeRequestBodyCartShipments{
-                        Address: &operations.PaymentsInitializeRequestBodyCartShipmentsAddressInput{},
+                        Address: operations.CreatePaymentsInitializeRequestBodyCartShipmentsAddressInputPaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput(
+                                operations.PaymentsInitializeRequestBodyCartShipmentsAddressAddressExplicitInput{
+                                    DotTag: "explicit",
+                                    Company: boltalphaspec.String("ACME Corporation"),
+                                    CountryCode: "US",
+                                    Email: boltalphaspec.String("alice@example.com"),
+                                    FirstName: "Alice",
+                                    LastName: "Baker",
+                                    Locality: "San Francisco",
+                                    Phone: boltalphaspec.String("+14155550199"),
+                                    PostalCode: "94105",
+                                    Region: boltalphaspec.String("CA"),
+                                    StreetAddress1: "535 Mission St, Ste 1401",
+                                    StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
+                                },
+                        ),
                         Carrier: boltalphaspec.String("FedEx"),
                         Cost: &shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesAmounts{
                             Currency: "USD",
@@ -183,9 +209,14 @@ func main() {
                     },
                 },
             },
-            PaymentMethod: operations.PaymentsInitializeRequestBodyPaymentMethod{},
+            PaymentMethod: operations.CreatePaymentsInitializeRequestBodyPaymentMethodPaymentsInitializeRequestBodyPaymentMethod1(
+                    operations.PaymentsInitializeRequestBodyPaymentMethod1{
+                        DotTag: operations.PaymentsInitializeRequestBodyPaymentMethod1TagSavedPaymentMethod,
+                        ID: "id",
+                    },
+            ),
         },
-        XPublishableKey: "possimus",
+        XPublishableKey: "Hybrid South",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)

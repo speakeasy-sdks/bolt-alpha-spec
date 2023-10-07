@@ -47,7 +47,12 @@ func main() {
     ctx := context.Background()
     res, err := s.Account.AccountAddPaymentMethod(ctx, operations.AccountAddPaymentMethodRequest{
         RequestBody: operations.AccountAddPaymentMethodRequestBodyInput{
-            BillingAddress: shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput{},
+            BillingAddress: shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID(
+                    shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID{
+                        DotTag: "id",
+                        ID: "D4g3h5tBuVYK9",
+                    },
+            ),
             Bin: "411111",
             Expiration: "2025-03",
             Last4: "1004",
@@ -55,7 +60,7 @@ func main() {
             Token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
             Type: operations.AccountAddPaymentMethodRequestBodyTypeCredit,
         },
-        XPublishableKey: "maroon Silicon female",
+        XPublishableKey: "Investment",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)

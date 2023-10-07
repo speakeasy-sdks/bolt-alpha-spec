@@ -126,12 +126,12 @@ func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddress() shared.One
 	return o.BillingAddress
 }
 
-func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddressExplicit() *shared.AddressExplicitInput {
-	return o.GetBillingAddress().AddressExplicitInput
+func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddressExplicit() *shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput {
+	return o.GetBillingAddress().OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput
 }
 
-func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddressID() *shared.AddressID {
-	return o.GetBillingAddress().AddressID
+func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddressID() *shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID {
+	return o.GetBillingAddress().OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID
 }
 
 func (o *AccountAddPaymentMethodRequestBodyInput) GetBin() string {
