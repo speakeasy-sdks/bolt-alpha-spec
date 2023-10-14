@@ -33,9 +33,7 @@ import(
 
 func main() {
     s := boltalphaspec.New(
-        boltalphaspec.WithSecurity(shared.Security{
-            APIKey: "",
-        }),
+        boltalphaspec.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -143,6 +141,8 @@ import(
 
 func main() {
     s := boltalphaspec.New()
+
+
     operationSecurity := operations.PaymentsInitializeSecurity{
             APIKey: "",
             Oauth: "",

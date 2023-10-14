@@ -213,9 +213,9 @@ func New(opts ...SDKOption) *BoltAlpha {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "3.0.1",
-			SDKVersion:        "0.6.2",
-			GenVersion:        "2.150.0",
-			UserAgent:         "speakeasy-sdk/go 0.6.2 2.150.0 3.0.1 github.com/speakeasy-sdks/bolt-alpha-spec",
+			SDKVersion:        "0.6.3",
+			GenVersion:        "2.155.1",
+			UserAgent:         "speakeasy-sdk/go 0.6.3 2.155.1 3.0.1 github.com/speakeasy-sdks/bolt-alpha-spec",
 			ServerDefaults: []map[string]string{
 				{
 					"username": "xwang",

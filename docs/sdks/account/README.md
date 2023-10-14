@@ -39,6 +39,8 @@ import(
 
 func main() {
     s := boltalphaspec.New()
+
+
     operationSecurity := operations.AccountAddPaymentMethodSecurity{
             APIKey: "",
             Oauth: "",
@@ -104,6 +106,8 @@ import(
 
 func main() {
     s := boltalphaspec.New()
+
+
     operationSecurity := operations.AccountAddressCreateSecurity{
             APIKey: "",
             Oauth: "",
@@ -172,9 +176,7 @@ import(
 
 func main() {
     s := boltalphaspec.New(
-        boltalphaspec.WithSecurity(shared.Security{
-            APIKey: "",
-        }),
+        boltalphaspec.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -227,6 +229,8 @@ import(
 
 func main() {
     s := boltalphaspec.New()
+
+
     operationSecurity := operations.AccountAddressEditSecurity{
             APIKey: "",
             Oauth: "",
@@ -294,9 +298,7 @@ import(
 
 func main() {
     s := boltalphaspec.New(
-        boltalphaspec.WithSecurity(shared.Security{
-            APIKey: "",
-        }),
+        boltalphaspec.WithSecurity(""),
     )
 
     ctx := context.Background()
@@ -348,6 +350,8 @@ import(
 
 func main() {
     s := boltalphaspec.New()
+
+
     operationSecurity := operations.AccountGetSecurity{
             APIKey: "",
             Oauth: "",
