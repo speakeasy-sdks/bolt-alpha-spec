@@ -38,7 +38,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Configuration.MerchantCallbacksGet(ctx, operations.MerchantCallbacksGetRequest{
-        XPublishableKey: "North",
+        XPublishableKey: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -109,7 +109,7 @@ func main() {
             UpdateCart: boltalphaspec.String("https://www.example.com/bolt/cart"),
             ValidateAdditionalAccountData: boltalphaspec.String("https://www.example.com/bolt/validate-account"),
         },
-        XPublishableKey: "Savings Analyst",
+        XPublishableKey: "string",
     })
     if err != nil {
         log.Fatal(err)

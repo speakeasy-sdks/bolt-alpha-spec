@@ -95,7 +95,7 @@ func main() {
                     },
             ),
         },
-        XPublishableKey: "Hyundai",
+        XPublishableKey: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -216,7 +216,7 @@ func main() {
                     },
             ),
         },
-        XPublishableKey: "Hybrid South",
+        XPublishableKey: "string",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)

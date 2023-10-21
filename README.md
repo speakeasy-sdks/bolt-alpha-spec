@@ -45,7 +45,7 @@ func main() {
 			Token:      "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
 			Type:       operations.AccountAddPaymentMethodRequestBodyTypeCredit,
 		},
-		XPublishableKey: "Investment",
+		XPublishableKey: "string",
 	}, operationSecurity)
 	if err != nil {
 		log.Fatal(err)

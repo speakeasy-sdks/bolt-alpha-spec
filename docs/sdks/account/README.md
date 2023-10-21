@@ -62,7 +62,7 @@ func main() {
             Token: "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
             Type: operations.AccountAddPaymentMethodRequestBodyTypeCredit,
         },
-        XPublishableKey: "Investment",
+        XPublishableKey: "string",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
@@ -129,7 +129,7 @@ func main() {
             StreetAddress1: "535 Mission St, Ste 1401",
             StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
         },
-        XPublishableKey: "Corporate Designer",
+        XPublishableKey: "string",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
@@ -181,7 +181,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Account.AccountAddressDelete(ctx, operations.AccountAddressDeleteRequest{
-        XPublishableKey: "bypassing Interactions inasmuch",
+        XPublishableKey: "string",
         ID: "D4g3h5tBuVYK9",
     })
     if err != nil {
@@ -238,7 +238,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Account.AccountAddressEdit(ctx, operations.AccountAddressEditRequest{
-        XPublishableKey: "Convertible",
+        XPublishableKey: "string",
         ID: "D4g3h5tBuVYK9",
         Oneaccount1addressesPostRequestBodyContentApplication1jsonSchemaInput: shared.Oneaccount1addressesPostRequestBodyContentApplication1jsonSchemaInput{
             Company: boltalphaspec.String("ACME Corporation"),
@@ -303,7 +303,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Account.AccountExists(ctx, operations.AccountExistsRequest{
-        XPublishableKey: "productize South Manager",
+        XPublishableKey: "string",
         Identifier: operations.AccountExistsIdentifier{
             IdentifierType: operations.AccountExistsIdentifierIdentifierTypeEmail,
             IdentifierValue: "alice@example.com",
@@ -359,7 +359,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Account.AccountGet(ctx, operations.AccountGetRequest{
-        XPublishableKey: "shrilly",
+        XPublishableKey: "string",
     }, operationSecurity)
     if err != nil {
         log.Fatal(err)
