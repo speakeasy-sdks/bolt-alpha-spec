@@ -9,6 +9,7 @@ generation:
     disableComments: false
     omitDescriptionIfSummaryPresent: false
   baseServerURL: ""
+  flattenGlobalSecurity: true
   repoURL: https://github.com/speakeasy-sdks/bolt-alpha-spec.git
   sdkClassName: bolt-alpha
   singleTagPerOp: false
@@ -23,6 +24,7 @@ features:
     unions: 2.84.0
 go:
   version: 0.7.0
+  clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   installationURL: https://github.com/speakeasy-sdks/bolt-alpha-spec
   maxMethodParams: 0
