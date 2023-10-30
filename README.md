@@ -16,42 +16,19 @@ package main
 import (
 	"context"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"log"
 )
 
 func main() {
-	s := boltalphaspec.New(
-		boltalphaspec.WithSecurity(shared.Security{
-			APIKey: "",
-			Oauth:  "",
-		}),
-	)
+	s := boltalphaspec.New()
 
 	ctx := context.Background()
-	res, err := s.Account.AddAddress(ctx, operations.AccountAddressCreateRequest{
-		XPublishableKey: "string",
-		AddressListingInput: shared.AddressListingInput{
-			Company:        boltalphaspec.String("ACME Corporation"),
-			CountryCode:    shared.AddressListingCountryCodeUs,
-			Email:          boltalphaspec.String("alice@example.com"),
-			FirstName:      "Alice",
-			IsDefault:      boltalphaspec.Bool(true),
-			LastName:       "Baker",
-			Locality:       "San Francisco",
-			Phone:          boltalphaspec.String("+14155550199"),
-			PostalCode:     "94105",
-			Region:         boltalphaspec.String("CA"),
-			StreetAddress1: "535 Mission St, Ste 1401",
-			StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
-		},
-	})
+	res, err := s.Pets.CreatePets(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.AddressListing != nil {
+	if res.StatusCode == http.StatusOK {
 		// handle response
 	}
 }
@@ -63,33 +40,11 @@ func main() {
 ## Available Resources and Operations
 
 
-### [Account](docs/sdks/account/README.md)
+### [Pets](docs/sdks/pets/README.md)
 
-* [AddAddress](docs/sdks/account/README.md#addaddress) - Add an address
-* [AddPaymentMethod](docs/sdks/account/README.md#addpaymentmethod) - Add a payment method to a shopper's Bolt account Wallet.
-* [DeleteAddress](docs/sdks/account/README.md#deleteaddress) - Delete an existing address
-* [DeletePaymentMethod](docs/sdks/account/README.md#deletepaymentmethod) - Delete an existing payment method
-* [Detect](docs/sdks/account/README.md#detect) - Determine the existence of a Bolt account
-* [GetDetails](docs/sdks/account/README.md#getdetails) - Retrieve account details
-* [UpdateAddress](docs/sdks/account/README.md#updateaddress) - Edit an existing address
-
-
-### [Payments.Guest](docs/sdks/paymentsguest/README.md)
-
-* [Initialize](docs/sdks/paymentsguest/README.md#initialize) - Initialize a Bolt payment for guest shoppers
-* [PerformAction](docs/sdks/paymentsguest/README.md#performaction) - Perform an irreversible action (e.g. finalize) on a pending guest payment
-* [Update](docs/sdks/paymentsguest/README.md#update) - Update an existing guest payment
-
-### [Payments.LoggedIn](docs/sdks/paymentsloggedin/README.md)
-
-* [Initialize](docs/sdks/paymentsloggedin/README.md#initialize) - Initialize a Bolt payment for logged in shoppers
-* [PerformAction](docs/sdks/paymentsloggedin/README.md#performaction) - Perform an irreversible action (e.g. finalize) on a pending payment
-* [Update](docs/sdks/paymentsloggedin/README.md#update) - Update an existing payment
-
-### [Testing](docs/sdks/testing/README.md)
-
-* [CreateAccount](docs/sdks/testing/README.md#createaccount) - Create a test account
-* [GetCreditCard](docs/sdks/testing/README.md#getcreditcard) - Retrieve a test credit card, including its token
+* [CreatePets](docs/sdks/pets/README.md#createpets) - Create a pet
+* [ListPets](docs/sdks/pets/README.md#listpets) - List all pets
+* [ShowPetByID](docs/sdks/pets/README.md#showpetbyid) - Info for a specific pet
 <!-- End SDK Available Operations -->
 
 
@@ -122,59 +77,6 @@ Here's an example of one such pagination call:
 # Error Handling
 
 Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
-
-
-## Example
-
-```go
-package main
-
-import (
-	"context"
-	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
-	"log"
-)
-
-func main() {
-	s := boltalphaspec.New(
-		boltalphaspec.WithSecurity(shared.Security{
-			APIKey: "",
-			Oauth:  "",
-		}),
-	)
-
-	ctx := context.Background()
-	res, err := s.Account.AddAddress(ctx, operations.AccountAddressCreateRequest{
-		XPublishableKey: "string",
-		AddressListingInput: shared.AddressListingInput{
-			Company:        boltalphaspec.String("ACME Corporation"),
-			CountryCode:    shared.AddressListingCountryCodeUs,
-			Email:          boltalphaspec.String("alice@example.com"),
-			FirstName:      "Alice",
-			IsDefault:      boltalphaspec.Bool(true),
-			LastName:       "Baker",
-			Locality:       "San Francisco",
-			Phone:          boltalphaspec.String("+14155550199"),
-			PostalCode:     "94105",
-			Region:         boltalphaspec.String("CA"),
-			StreetAddress1: "535 Mission St, Ste 1401",
-			StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
-		},
-	})
-	if err != nil {
-
-		var e *accountAddressCreate_4XXApplicationJSON_OneOf
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-	}
-}
-
-```
 <!-- End Error Handling -->
 
 
@@ -188,11 +90,7 @@ You can override the default server globally using the `WithServerIndex` option 
 
 | # | Server | Variables |
 | - | ------ | --------- |
-| 0 | `https://{environment}.bolt.com/v3` | `environment` (default is `api-sandbox`) |
-
-
-Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
- * `WithEnvironment ServerEnvironment`
+| 0 | `http://petstore.swagger.io/v1` | None |
 
 For example:
 
@@ -203,43 +101,21 @@ package main
 import (
 	"context"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"log"
 )
 
 func main() {
 	s := boltalphaspec.New(
-		boltalphaspec.WithSecurity(shared.Security{
-			APIKey: "",
-			Oauth:  "",
-		}),
 		boltalphaspec.WithServerIndex(0),
 	)
 
 	ctx := context.Background()
-	res, err := s.Account.AddAddress(ctx, operations.AccountAddressCreateRequest{
-		XPublishableKey: "string",
-		AddressListingInput: shared.AddressListingInput{
-			Company:        boltalphaspec.String("ACME Corporation"),
-			CountryCode:    shared.AddressListingCountryCodeUs,
-			Email:          boltalphaspec.String("alice@example.com"),
-			FirstName:      "Alice",
-			IsDefault:      boltalphaspec.Bool(true),
-			LastName:       "Baker",
-			Locality:       "San Francisco",
-			Phone:          boltalphaspec.String("+14155550199"),
-			PostalCode:     "94105",
-			Region:         boltalphaspec.String("CA"),
-			StreetAddress1: "535 Mission St, Ste 1401",
-			StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
-		},
-	})
+	res, err := s.Pets.CreatePets(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.AddressListing != nil {
+	if res.StatusCode == http.StatusOK {
 		// handle response
 	}
 }
@@ -258,43 +134,21 @@ package main
 import (
 	"context"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"log"
 )
 
 func main() {
 	s := boltalphaspec.New(
-		boltalphaspec.WithSecurity(shared.Security{
-			APIKey: "",
-			Oauth:  "",
-		}),
-		boltalphaspec.WithServerURL("https://{environment}.bolt.com/v3"),
+		boltalphaspec.WithServerURL("http://petstore.swagger.io/v1"),
 	)
 
 	ctx := context.Background()
-	res, err := s.Account.AddAddress(ctx, operations.AccountAddressCreateRequest{
-		XPublishableKey: "string",
-		AddressListingInput: shared.AddressListingInput{
-			Company:        boltalphaspec.String("ACME Corporation"),
-			CountryCode:    shared.AddressListingCountryCodeUs,
-			Email:          boltalphaspec.String("alice@example.com"),
-			FirstName:      "Alice",
-			IsDefault:      boltalphaspec.Bool(true),
-			LastName:       "Baker",
-			Locality:       "San Francisco",
-			Phone:          boltalphaspec.String("+14155550199"),
-			PostalCode:     "94105",
-			Region:         boltalphaspec.String("CA"),
-			StreetAddress1: "535 Mission St, Ste 1401",
-			StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
-		},
-	})
+	res, err := s.Pets.CreatePets(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.AddressListing != nil {
+	if res.StatusCode == http.StatusOK {
 		// handle response
 	}
 }

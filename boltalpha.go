@@ -3,10 +3,7 @@
 package boltalphaspec
 
 import (
-	"context"
-	"encoding/json"
 	"fmt"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 	"time"
@@ -14,7 +11,7 @@ import (
 
 // ServerList contains the list of servers available to the SDK
 var ServerList = []string{
-	"https://{environment}.bolt.com/v3",
+	"http://petstore.swagger.io/v1",
 }
 
 // HTTPClient provides an interface for suplying the SDK with a custom HTTP client
@@ -41,12 +38,11 @@ func Float32(f float32) *float32 { return &f }
 func Float64(f float64) *float64 { return &f }
 
 type sdkConfiguration struct {
-	DefaultClient     HTTPClient
-	SecurityClient    HTTPClient
-	Security          func(context.Context) (interface{}, error)
+	DefaultClient  HTTPClient
+	SecurityClient HTTPClient
+
 	ServerURL         string
 	ServerIndex       int
-	ServerDefaults    []map[string]string
 	Language          string
 	OpenAPIDocVersion string
 	SDKVersion        string
@@ -60,20 +56,11 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 		return c.ServerURL, nil
 	}
 
-	return ServerList[c.ServerIndex], c.ServerDefaults[c.ServerIndex]
+	return ServerList[c.ServerIndex], nil
 }
 
-// BoltAlpha - Bolt API Reference: A comprehensive Bolt API reference for interacting with Transactions, Orders, Product Catalog, Configuration, Testing, and much more.
 type BoltAlpha struct {
-	// Account endpoints allow you to view and manage shoppers' accounts. For example,
-	// you can add or remove addresses and payment information.
-	//
-	Account  *account
-	Payments *payments
-	// Endpoints that allow you to generate and retrieve test data to verify certain
-	// flows in non-production environments.
-	//
-	Testing *testing
+	Pets *pets
 
 	sdkConfiguration sdkConfiguration
 }
@@ -109,73 +96,10 @@ func WithServerIndex(serverIndex int) SDKOption {
 	}
 }
 
-type ServerEnvironment string
-
-const (
-	ServerEnvironmentAPI        ServerEnvironment = "api"
-	ServerEnvironmentAPISandbox ServerEnvironment = "api-sandbox"
-)
-
-func (e ServerEnvironment) ToPointer() *ServerEnvironment {
-	return &e
-}
-
-func (e *ServerEnvironment) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "api":
-		fallthrough
-	case "api-sandbox":
-		*e = ServerEnvironment(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ServerEnvironment: %v", v)
-	}
-}
-
-// WithEnvironment allows setting the environment variable for url substitution
-func WithEnvironment(environment ServerEnvironment) SDKOption {
-	return func(sdk *BoltAlpha) {
-		for idx := range sdk.sdkConfiguration.ServerDefaults {
-			if _, ok := sdk.sdkConfiguration.ServerDefaults[idx]["environment"]; !ok {
-				continue
-			}
-
-			sdk.sdkConfiguration.ServerDefaults[idx]["environment"] = fmt.Sprintf("%v", environment)
-		}
-	}
-}
-
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
 	return func(sdk *BoltAlpha) {
 		sdk.sdkConfiguration.DefaultClient = client
-	}
-}
-
-func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
-	return func(context.Context) (interface{}, error) {
-		return &security, nil
-	}
-}
-
-// WithSecurity configures the SDK to use the provided security details
-
-func WithSecurity(security shared.Security) SDKOption {
-	return func(sdk *BoltAlpha) {
-		sdk.sdkConfiguration.Security = withSecurity(security)
-	}
-}
-
-// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
-func WithSecuritySource(security func(context.Context) (shared.Security, error)) SDKOption {
-	return func(sdk *BoltAlpha) {
-		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
-			return security(ctx)
-		}
 	}
 }
 
@@ -190,15 +114,10 @@ func New(opts ...SDKOption) *BoltAlpha {
 	sdk := &BoltAlpha{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "3.0.1",
-			SDKVersion:        "0.7.1",
+			OpenAPIDocVersion: "1.0.0",
+			SDKVersion:        "0.7.2",
 			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 0.7.1 2.173.0 3.0.1 github.com/speakeasy-sdks/bolt-alpha-spec",
-			ServerDefaults: []map[string]string{
-				{
-					"environment": "api-sandbox",
-				},
-			},
+			UserAgent:         "speakeasy-sdk/go 0.7.2 2.173.0 1.0.0 github.com/speakeasy-sdks/bolt-alpha-spec",
 		},
 	}
 	for _, opt := range opts {
@@ -210,18 +129,10 @@ func New(opts ...SDKOption) *BoltAlpha {
 		sdk.sdkConfiguration.DefaultClient = &http.Client{Timeout: 60 * time.Second}
 	}
 	if sdk.sdkConfiguration.SecurityClient == nil {
-		if sdk.sdkConfiguration.Security != nil {
-			sdk.sdkConfiguration.SecurityClient = utils.ConfigureSecurityClient(sdk.sdkConfiguration.DefaultClient, sdk.sdkConfiguration.Security)
-		} else {
-			sdk.sdkConfiguration.SecurityClient = sdk.sdkConfiguration.DefaultClient
-		}
+		sdk.sdkConfiguration.SecurityClient = sdk.sdkConfiguration.DefaultClient
 	}
 
-	sdk.Account = newAccount(sdk.sdkConfiguration)
-
-	sdk.Payments = newPayments(sdk.sdkConfiguration)
-
-	sdk.Testing = newTesting(sdk.sdkConfiguration)
+	sdk.Pets = newPets(sdk.sdkConfiguration)
 
 	return sdk
 }
