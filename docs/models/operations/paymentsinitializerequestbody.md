@@ -1,9 +1,0 @@
-# PaymentsInitializeRequestBody
-
-
-## Fields
-
-| Field                                                                                                               | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `Cart`                                                                                                              | [PaymentsInitializeRequestBodyCart](../../models/operations/paymentsinitializerequestbodycart.md)                   | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
-| `PaymentMethod`                                                                                                     | [PaymentsInitializeRequestBodyPaymentMethod](../../models/operations/paymentsinitializerequestbodypaymentmethod.md) | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |

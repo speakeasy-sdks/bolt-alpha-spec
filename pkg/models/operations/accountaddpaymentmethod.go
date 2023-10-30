@@ -3,190 +3,14 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"net/http"
 )
 
-type AccountAddPaymentMethodSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-	Oauth  string `security:"scheme,type=oauth2,name=Authorization"`
-}
-
-func (o *AccountAddPaymentMethodSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
-
-func (o *AccountAddPaymentMethodSecurity) GetOauth() string {
-	if o == nil {
-		return ""
-	}
-	return o.Oauth
-}
-
-// AccountAddPaymentMethodRequestBodyNetwork - The credit card network.
-type AccountAddPaymentMethodRequestBodyNetwork string
-
-const (
-	AccountAddPaymentMethodRequestBodyNetworkVisa         AccountAddPaymentMethodRequestBodyNetwork = "visa"
-	AccountAddPaymentMethodRequestBodyNetworkMastercard   AccountAddPaymentMethodRequestBodyNetwork = "mastercard"
-	AccountAddPaymentMethodRequestBodyNetworkAmex         AccountAddPaymentMethodRequestBodyNetwork = "amex"
-	AccountAddPaymentMethodRequestBodyNetworkDiscover     AccountAddPaymentMethodRequestBodyNetwork = "discover"
-	AccountAddPaymentMethodRequestBodyNetworkJcb          AccountAddPaymentMethodRequestBodyNetwork = "jcb"
-	AccountAddPaymentMethodRequestBodyNetworkUnionpay     AccountAddPaymentMethodRequestBodyNetwork = "unionpay"
-	AccountAddPaymentMethodRequestBodyNetworkAlliancedata AccountAddPaymentMethodRequestBodyNetwork = "alliancedata"
-	AccountAddPaymentMethodRequestBodyNetworkCitiplcc     AccountAddPaymentMethodRequestBodyNetwork = "citiplcc"
-)
-
-func (e AccountAddPaymentMethodRequestBodyNetwork) ToPointer() *AccountAddPaymentMethodRequestBodyNetwork {
-	return &e
-}
-
-func (e *AccountAddPaymentMethodRequestBodyNetwork) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "visa":
-		fallthrough
-	case "mastercard":
-		fallthrough
-	case "amex":
-		fallthrough
-	case "discover":
-		fallthrough
-	case "jcb":
-		fallthrough
-	case "unionpay":
-		fallthrough
-	case "alliancedata":
-		fallthrough
-	case "citiplcc":
-		*e = AccountAddPaymentMethodRequestBodyNetwork(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountAddPaymentMethodRequestBodyNetwork: %v", v)
-	}
-}
-
-// AccountAddPaymentMethodRequestBodyType - Credit card type
-type AccountAddPaymentMethodRequestBodyType string
-
-const (
-	AccountAddPaymentMethodRequestBodyTypeCredit AccountAddPaymentMethodRequestBodyType = "credit"
-	AccountAddPaymentMethodRequestBodyTypePlcc   AccountAddPaymentMethodRequestBodyType = "plcc"
-)
-
-func (e AccountAddPaymentMethodRequestBodyType) ToPointer() *AccountAddPaymentMethodRequestBodyType {
-	return &e
-}
-
-func (e *AccountAddPaymentMethodRequestBodyType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "credit":
-		fallthrough
-	case "plcc":
-		*e = AccountAddPaymentMethodRequestBodyType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountAddPaymentMethodRequestBodyType: %v", v)
-	}
-}
-
-type AccountAddPaymentMethodRequestBodyInput struct {
-	// The Address object is used for shipping, and physical store address use cases.
-	BillingAddress shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput `json:"billing_address"`
-	// The Bank Identification Number for the credit card. This is typically the first 4-6 digits of the credit card number.
-	Bin string `json:"bin"`
-	// The expiration date of the credit card. TODO TO MAKE EXPIRATION REUSABLE
-	Expiration string `json:"expiration"`
-	// The last 4 digits of the credit card number.
-	Last4 string `json:"last4"`
-	// The credit card network.
-	Network AccountAddPaymentMethodRequestBodyNetwork `json:"network"`
-	// The Bolt token associated to the credit card.
-	Token string `json:"token"`
-	// Credit card type
-	Type AccountAddPaymentMethodRequestBodyType `json:"type"`
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddress() shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput {
-	if o == nil {
-		return shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInput{}
-	}
-	return o.BillingAddress
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddressExplicit() *shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput {
-	return o.GetBillingAddress().OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressExplicitInput
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetBillingAddressID() *shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID {
-	return o.GetBillingAddress().OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetBin() string {
-	if o == nil {
-		return ""
-	}
-	return o.Bin
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetExpiration() string {
-	if o == nil {
-		return ""
-	}
-	return o.Expiration
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetLast4() string {
-	if o == nil {
-		return ""
-	}
-	return o.Last4
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetNetwork() AccountAddPaymentMethodRequestBodyNetwork {
-	if o == nil {
-		return AccountAddPaymentMethodRequestBodyNetwork("")
-	}
-	return o.Network
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetToken() string {
-	if o == nil {
-		return ""
-	}
-	return o.Token
-}
-
-func (o *AccountAddPaymentMethodRequestBodyInput) GetType() AccountAddPaymentMethodRequestBodyType {
-	if o == nil {
-		return AccountAddPaymentMethodRequestBodyType("")
-	}
-	return o.Type
-}
-
 type AccountAddPaymentMethodRequest struct {
-	RequestBody AccountAddPaymentMethodRequestBodyInput `request:"mediaType=application/json"`
 	// The publicly viewable identifier used to identify a merchant division.
-	XPublishableKey string `header:"style=simple,explode=false,name=X-Publishable-Key"`
-}
-
-func (o *AccountAddPaymentMethodRequest) GetRequestBody() AccountAddPaymentMethodRequestBodyInput {
-	if o == nil {
-		return AccountAddPaymentMethodRequestBodyInput{}
-	}
-	return o.RequestBody
+	XPublishableKey    string                    `header:"style=simple,explode=false,name=X-Publishable-Key"`
+	PaymentMethodInput shared.PaymentMethodInput `request:"mediaType=application/json"`
 }
 
 func (o *AccountAddPaymentMethodRequest) GetXPublishableKey() string {
@@ -194,6 +18,21 @@ func (o *AccountAddPaymentMethodRequest) GetXPublishableKey() string {
 		return ""
 	}
 	return o.XPublishableKey
+}
+
+func (o *AccountAddPaymentMethodRequest) GetPaymentMethodInput() shared.PaymentMethodInput {
+	if o == nil {
+		return shared.PaymentMethodInput{}
+	}
+	return o.PaymentMethodInput
+}
+
+func (o *AccountAddPaymentMethodRequest) GetPaymentMethodInputCreditCard() *shared.PaymentMethodCreditCardInput {
+	return o.GetPaymentMethodInput().PaymentMethodCreditCardInput
+}
+
+func (o *AccountAddPaymentMethodRequest) GetPaymentMethodInputPaypal() *shared.PaymentMethodPaypal {
+	return o.GetPaymentMethodInput().PaymentMethodPaypal
 }
 
 type AccountAddPaymentMethodResponse struct {
@@ -204,7 +43,7 @@ type AccountAddPaymentMethodResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The payment method was successfully added
-	Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchema *shared.Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchemaOutput
+	PaymentMethod *shared.PaymentMethodOutput
 }
 
 func (o *AccountAddPaymentMethodResponse) GetContentType() string {
@@ -228,9 +67,23 @@ func (o *AccountAddPaymentMethodResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *AccountAddPaymentMethodResponse) GetOneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchema() *shared.Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchemaOutput {
+func (o *AccountAddPaymentMethodResponse) GetPaymentMethod() *shared.PaymentMethodOutput {
 	if o == nil {
 		return nil
 	}
-	return o.Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchema
+	return o.PaymentMethod
+}
+
+func (o *AccountAddPaymentMethodResponse) GetPaymentMethodCreditCard() *shared.PaymentMethodCreditCardOutput {
+	if v := o.GetPaymentMethod(); v != nil {
+		return v.PaymentMethodCreditCardOutput
+	}
+	return nil
+}
+
+func (o *AccountAddPaymentMethodResponse) GetPaymentMethodPaypal() *shared.PaymentMethodPaypalOutput {
+	if v := o.GetPaymentMethod(); v != nil {
+		return v.PaymentMethodPaypalOutput
+	}
+	return nil
 }

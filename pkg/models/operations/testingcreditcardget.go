@@ -3,104 +3,19 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"net/http"
 )
 
-// TestingCreditCardGet200ApplicationJSONNetwork - The credit card network.
-type TestingCreditCardGet200ApplicationJSONNetwork string
-
-const (
-	TestingCreditCardGet200ApplicationJSONNetworkVisa         TestingCreditCardGet200ApplicationJSONNetwork = "visa"
-	TestingCreditCardGet200ApplicationJSONNetworkMastercard   TestingCreditCardGet200ApplicationJSONNetwork = "mastercard"
-	TestingCreditCardGet200ApplicationJSONNetworkAmex         TestingCreditCardGet200ApplicationJSONNetwork = "amex"
-	TestingCreditCardGet200ApplicationJSONNetworkDiscover     TestingCreditCardGet200ApplicationJSONNetwork = "discover"
-	TestingCreditCardGet200ApplicationJSONNetworkJcb          TestingCreditCardGet200ApplicationJSONNetwork = "jcb"
-	TestingCreditCardGet200ApplicationJSONNetworkUnionpay     TestingCreditCardGet200ApplicationJSONNetwork = "unionpay"
-	TestingCreditCardGet200ApplicationJSONNetworkAlliancedata TestingCreditCardGet200ApplicationJSONNetwork = "alliancedata"
-	TestingCreditCardGet200ApplicationJSONNetworkCitiplcc     TestingCreditCardGet200ApplicationJSONNetwork = "citiplcc"
-)
-
-func (e TestingCreditCardGet200ApplicationJSONNetwork) ToPointer() *TestingCreditCardGet200ApplicationJSONNetwork {
-	return &e
+type TestingCreditCardGetSecurity struct {
+	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
 }
 
-func (e *TestingCreditCardGet200ApplicationJSONNetwork) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "visa":
-		fallthrough
-	case "mastercard":
-		fallthrough
-	case "amex":
-		fallthrough
-	case "discover":
-		fallthrough
-	case "jcb":
-		fallthrough
-	case "unionpay":
-		fallthrough
-	case "alliancedata":
-		fallthrough
-	case "citiplcc":
-		*e = TestingCreditCardGet200ApplicationJSONNetwork(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TestingCreditCardGet200ApplicationJSONNetwork: %v", v)
-	}
-}
-
-// TestingCreditCardGet200ApplicationJSON - Successfully generated test credit card details
-type TestingCreditCardGet200ApplicationJSON struct {
-	// The Bank Identification Number for the credit card. This is typically the first 4-6 digits of the credit card number.
-	Bin string `json:"bin"`
-	// The expiration date of the credit card. TODO TO MAKE EXPIRATION REUSABLE
-	Expiration string `json:"expiration"`
-	// The last 4 digits of the credit card number.
-	Last4 string `json:"last4"`
-	// The credit card network.
-	Network TestingCreditCardGet200ApplicationJSONNetwork `json:"network"`
-	// The Bolt token associated to the credit card.
-	Token string `json:"token"`
-}
-
-func (o *TestingCreditCardGet200ApplicationJSON) GetBin() string {
+func (o *TestingCreditCardGetSecurity) GetAPIKey() string {
 	if o == nil {
 		return ""
 	}
-	return o.Bin
-}
-
-func (o *TestingCreditCardGet200ApplicationJSON) GetExpiration() string {
-	if o == nil {
-		return ""
-	}
-	return o.Expiration
-}
-
-func (o *TestingCreditCardGet200ApplicationJSON) GetLast4() string {
-	if o == nil {
-		return ""
-	}
-	return o.Last4
-}
-
-func (o *TestingCreditCardGet200ApplicationJSON) GetNetwork() TestingCreditCardGet200ApplicationJSONNetwork {
-	if o == nil {
-		return TestingCreditCardGet200ApplicationJSONNetwork("")
-	}
-	return o.Network
-}
-
-func (o *TestingCreditCardGet200ApplicationJSON) GetToken() string {
-	if o == nil {
-		return ""
-	}
-	return o.Token
+	return o.APIKey
 }
 
 type TestingCreditCardGetResponse struct {
@@ -111,7 +26,7 @@ type TestingCreditCardGetResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// Successfully generated test credit card details
-	TestingCreditCardGet200ApplicationJSONObject *TestingCreditCardGet200ApplicationJSON
+	CreditCard *shared.CreditCardOutput
 }
 
 func (o *TestingCreditCardGetResponse) GetContentType() string {
@@ -135,9 +50,9 @@ func (o *TestingCreditCardGetResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *TestingCreditCardGetResponse) GetTestingCreditCardGet200ApplicationJSONObject() *TestingCreditCardGet200ApplicationJSON {
+func (o *TestingCreditCardGetResponse) GetCreditCard() *shared.CreditCardOutput {
 	if o == nil {
 		return nil
 	}
-	return o.TestingCreditCardGet200ApplicationJSONObject
+	return o.CreditCard
 }

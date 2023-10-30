@@ -14,7 +14,6 @@ import (
 
 // ServerList contains the list of servers available to the SDK
 var ServerList = []string{
-	"https://api.{username}.dev.bolt.me/v3",
 	"https://{environment}.bolt.com/v3",
 }
 
@@ -69,25 +68,12 @@ type BoltAlpha struct {
 	// Account endpoints allow you to view and manage shoppers' accounts. For example,
 	// you can add or remove addresses and payment information.
 	//
-	Account *account
-	// Merchant configuration endpoints allow you to retrieve and configure merchant-level
-	// configuration, such as callback URLs, identifiers, secrets, etc...
-	//
-	Configuration *configuration
-	// Use the Payments API to tokenize and process alternative payment methods including Paypal with Bolt. This API is for the Bolt
-	// Accounts package.
-	//
+	Account  *account
 	Payments *payments
 	// Endpoints that allow you to generate and retrieve test data to verify certain
 	// flows in non-production environments.
 	//
 	Testing *testing
-	// Set up webhooks to notify your backend of events within Bolt. These webhooks
-	// can communicate with your OMS or other systems to keep them up to date with Bolt.
-	//
-	//
-	// https://help.bolt.com/get-started/during-checkout/webhooks/
-	Webhooks *webhooks
 
 	sdkConfiguration sdkConfiguration
 }
@@ -128,7 +114,6 @@ type ServerEnvironment string
 const (
 	ServerEnvironmentAPI        ServerEnvironment = "api"
 	ServerEnvironmentAPISandbox ServerEnvironment = "api-sandbox"
-	ServerEnvironmentAPIStaging ServerEnvironment = "api-staging"
 )
 
 func (e ServerEnvironment) ToPointer() *ServerEnvironment {
@@ -144,8 +129,6 @@ func (e *ServerEnvironment) UnmarshalJSON(data []byte) error {
 	case "api":
 		fallthrough
 	case "api-sandbox":
-		fallthrough
-	case "api-staging":
 		*e = ServerEnvironment(v)
 		return nil
 	default:
@@ -166,19 +149,6 @@ func WithEnvironment(environment ServerEnvironment) SDKOption {
 	}
 }
 
-// WithUsername allows setting the username variable for url substitution
-func WithUsername(username string) SDKOption {
-	return func(sdk *BoltAlpha) {
-		for idx := range sdk.sdkConfiguration.ServerDefaults {
-			if _, ok := sdk.sdkConfiguration.ServerDefaults[idx]["username"]; !ok {
-				continue
-			}
-
-			sdk.sdkConfiguration.ServerDefaults[idx]["username"] = fmt.Sprintf("%v", username)
-		}
-	}
-}
-
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
 	return func(sdk *BoltAlpha) {
@@ -194,10 +164,18 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 
 // WithSecurity configures the SDK to use the provided security details
 
-func WithSecurity(apiKey string) SDKOption {
+func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *BoltAlpha) {
-		security := shared.Security{APIKey: apiKey}
-		sdk.sdkConfiguration.Security = withSecurity(&security)
+		sdk.sdkConfiguration.Security = withSecurity(security)
+	}
+}
+
+// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
+func WithSecuritySource(security func(context.Context) (shared.Security, error)) SDKOption {
+	return func(sdk *BoltAlpha) {
+		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
+			return security(ctx)
+		}
 	}
 }
 
@@ -213,13 +191,10 @@ func New(opts ...SDKOption) *BoltAlpha {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "3.0.1",
-			SDKVersion:        "0.7.0",
-			GenVersion:        "2.169.0",
-			UserAgent:         "speakeasy-sdk/go 0.7.0 2.169.0 3.0.1 github.com/speakeasy-sdks/bolt-alpha-spec",
+			SDKVersion:        "0.7.1",
+			GenVersion:        "2.173.0",
+			UserAgent:         "speakeasy-sdk/go 0.7.1 2.173.0 3.0.1 github.com/speakeasy-sdks/bolt-alpha-spec",
 			ServerDefaults: []map[string]string{
-				{
-					"username": "xwang",
-				},
 				{
 					"environment": "api-sandbox",
 				},
@@ -244,13 +219,9 @@ func New(opts ...SDKOption) *BoltAlpha {
 
 	sdk.Account = newAccount(sdk.sdkConfiguration)
 
-	sdk.Configuration = newConfiguration(sdk.sdkConfiguration)
-
 	sdk.Payments = newPayments(sdk.sdkConfiguration)
 
 	sdk.Testing = newTesting(sdk.sdkConfiguration)
-
-	sdk.Webhooks = newWebhooks(sdk.sdkConfiguration)
 
 	return sdk
 }

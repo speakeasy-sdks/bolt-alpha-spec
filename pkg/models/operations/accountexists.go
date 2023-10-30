@@ -3,61 +3,9 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"net/http"
 )
-
-// AccountExistsIdentifierIdentifierType - The type of identifier
-type AccountExistsIdentifierIdentifierType string
-
-const (
-	AccountExistsIdentifierIdentifierTypeEmail       AccountExistsIdentifierIdentifierType = "email"
-	AccountExistsIdentifierIdentifierTypeEmailSha256 AccountExistsIdentifierIdentifierType = "email_sha256"
-)
-
-func (e AccountExistsIdentifierIdentifierType) ToPointer() *AccountExistsIdentifierIdentifierType {
-	return &e
-}
-
-func (e *AccountExistsIdentifierIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "email":
-		fallthrough
-	case "email_sha256":
-		*e = AccountExistsIdentifierIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountExistsIdentifierIdentifierType: %v", v)
-	}
-}
-
-// AccountExistsIdentifier - A type and value combination that defines the identifier used to detect
-// the existence of an account.
-type AccountExistsIdentifier struct {
-	// The type of identifier
-	IdentifierType AccountExistsIdentifierIdentifierType `queryParam:"name=identifier_type"`
-	// The value of the identifier. The value must be valid for the specified `identifier_type`
-	IdentifierValue string `queryParam:"name=identifier_value"`
-}
-
-func (o *AccountExistsIdentifier) GetIdentifierType() AccountExistsIdentifierIdentifierType {
-	if o == nil {
-		return AccountExistsIdentifierIdentifierType("")
-	}
-	return o.IdentifierType
-}
-
-func (o *AccountExistsIdentifier) GetIdentifierValue() string {
-	if o == nil {
-		return ""
-	}
-	return o.IdentifierValue
-}
 
 type AccountExistsRequest struct {
 	// The publicly viewable identifier used to identify a merchant division.
@@ -65,7 +13,7 @@ type AccountExistsRequest struct {
 	// A type and value combination that defines the identifier used to detect
 	// the existence of an account.
 	//
-	Identifier AccountExistsIdentifier `queryParam:"style=form,explode=true,name=identifier"`
+	Identifier shared.Identifier `queryParam:"style=form,explode=true,name=identifier"`
 }
 
 func (o *AccountExistsRequest) GetXPublishableKey() string {
@@ -75,35 +23,11 @@ func (o *AccountExistsRequest) GetXPublishableKey() string {
 	return o.XPublishableKey
 }
 
-func (o *AccountExistsRequest) GetIdentifier() AccountExistsIdentifier {
+func (o *AccountExistsRequest) GetIdentifier() shared.Identifier {
 	if o == nil {
-		return AccountExistsIdentifier{}
+		return shared.Identifier{}
 	}
 	return o.Identifier
-}
-
-// AccountExists422ApplicationJSON - An error has occured, e.g. the identifier is not associated with an existing Bolt account
-type AccountExists422ApplicationJSON struct {
-	// The type of error returned
-	DotTag string `json:".tag"`
-	// A human-readable error message, which might include information specific to
-	// the request that was made.
-	//
-	Message string `json:"message"`
-}
-
-func (o *AccountExists422ApplicationJSON) GetDotTag() string {
-	if o == nil {
-		return ""
-	}
-	return o.DotTag
-}
-
-func (o *AccountExists422ApplicationJSON) GetMessage() string {
-	if o == nil {
-		return ""
-	}
-	return o.Message
 }
 
 type AccountExistsResponse struct {
@@ -113,8 +37,6 @@ type AccountExistsResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// An error has occured, e.g. the identifier is not associated with an existing Bolt account
-	AccountExists422ApplicationJSONObject *AccountExists422ApplicationJSON
 }
 
 func (o *AccountExistsResponse) GetContentType() string {
@@ -136,11 +58,4 @@ func (o *AccountExistsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *AccountExistsResponse) GetAccountExists422ApplicationJSONObject() *AccountExists422ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AccountExists422ApplicationJSONObject
 }

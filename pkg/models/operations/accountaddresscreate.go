@@ -3,143 +3,14 @@
 package operations
 
 import (
-	"encoding/json"
-	"errors"
-	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
 )
 
-type AccountAddressCreateSecurity struct {
-	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
-	Oauth  string `security:"scheme,type=oauth2,name=Authorization"`
-}
-
-func (o *AccountAddressCreateSecurity) GetAPIKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.APIKey
-}
-
-func (o *AccountAddressCreateSecurity) GetOauth() string {
-	if o == nil {
-		return ""
-	}
-	return o.Oauth
-}
-
-type AccountAddressCreateRequestBodyInput struct {
-	Company        *string `json:"company,omitempty"`
-	CountryCode    string  `json:"country_code"`
-	Email          *string `json:"email,omitempty"`
-	FirstName      string  `json:"first_name"`
-	IsDefault      *bool   `json:"is_default,omitempty"`
-	LastName       string  `json:"last_name"`
-	Locality       string  `json:"locality"`
-	Phone          *string `json:"phone,omitempty"`
-	PostalCode     string  `json:"postal_code"`
-	Region         *string `json:"region,omitempty"`
-	StreetAddress1 string  `json:"street_address1"`
-	StreetAddress2 *string `json:"street_address2,omitempty"`
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetCompany() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Company
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetCountryCode() string {
-	if o == nil {
-		return ""
-	}
-	return o.CountryCode
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetEmail() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Email
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetFirstName() string {
-	if o == nil {
-		return ""
-	}
-	return o.FirstName
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetIsDefault() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.IsDefault
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetLastName() string {
-	if o == nil {
-		return ""
-	}
-	return o.LastName
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetLocality() string {
-	if o == nil {
-		return ""
-	}
-	return o.Locality
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetPhone() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Phone
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetPostalCode() string {
-	if o == nil {
-		return ""
-	}
-	return o.PostalCode
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetRegion() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Region
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetStreetAddress1() string {
-	if o == nil {
-		return ""
-	}
-	return o.StreetAddress1
-}
-
-func (o *AccountAddressCreateRequestBodyInput) GetStreetAddress2() *string {
-	if o == nil {
-		return nil
-	}
-	return o.StreetAddress2
-}
-
 type AccountAddressCreateRequest struct {
-	RequestBody AccountAddressCreateRequestBodyInput `request:"mediaType=application/json"`
 	// The publicly viewable identifier used to identify a merchant division.
-	XPublishableKey string `header:"style=simple,explode=false,name=X-Publishable-Key"`
-}
-
-func (o *AccountAddressCreateRequest) GetRequestBody() AccountAddressCreateRequestBodyInput {
-	if o == nil {
-		return AccountAddressCreateRequestBodyInput{}
-	}
-	return o.RequestBody
+	XPublishableKey     string                     `header:"style=simple,explode=false,name=X-Publishable-Key"`
+	AddressListingInput shared.AddressListingInput `request:"mediaType=application/json"`
 }
 
 func (o *AccountAddressCreateRequest) GetXPublishableKey() string {
@@ -149,163 +20,11 @@ func (o *AccountAddressCreateRequest) GetXPublishableKey() string {
 	return o.XPublishableKey
 }
 
-// AccountAddressCreate400ApplicationJSON2Tag - The type of error returned
-type AccountAddressCreate400ApplicationJSON2Tag string
-
-const (
-	AccountAddressCreate400ApplicationJSON2TagInvalidRegion AccountAddressCreate400ApplicationJSON2Tag = "invalid_region"
-)
-
-func (e AccountAddressCreate400ApplicationJSON2Tag) ToPointer() *AccountAddressCreate400ApplicationJSON2Tag {
-	return &e
-}
-
-func (e *AccountAddressCreate400ApplicationJSON2Tag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "invalid_region":
-		*e = AccountAddressCreate400ApplicationJSON2Tag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountAddressCreate400ApplicationJSON2Tag: %v", v)
-	}
-}
-
-type AccountAddressCreate400ApplicationJSON2 struct {
-	// The type of error returned
-	DotTag AccountAddressCreate400ApplicationJSON2Tag `json:".tag"`
-	// A human-readable error message, which might include information specific to
-	// the request that was made.
-	//
-	Message string `json:"message"`
-}
-
-func (o *AccountAddressCreate400ApplicationJSON2) GetDotTag() AccountAddressCreate400ApplicationJSON2Tag {
+func (o *AccountAddressCreateRequest) GetAddressListingInput() shared.AddressListingInput {
 	if o == nil {
-		return AccountAddressCreate400ApplicationJSON2Tag("")
+		return shared.AddressListingInput{}
 	}
-	return o.DotTag
-}
-
-func (o *AccountAddressCreate400ApplicationJSON2) GetMessage() string {
-	if o == nil {
-		return ""
-	}
-	return o.Message
-}
-
-// AccountAddressCreate400ApplicationJSON1Tag - The type of error returned
-type AccountAddressCreate400ApplicationJSON1Tag string
-
-const (
-	AccountAddressCreate400ApplicationJSON1TagInvalidPostalCode AccountAddressCreate400ApplicationJSON1Tag = "invalid_postal_code"
-)
-
-func (e AccountAddressCreate400ApplicationJSON1Tag) ToPointer() *AccountAddressCreate400ApplicationJSON1Tag {
-	return &e
-}
-
-func (e *AccountAddressCreate400ApplicationJSON1Tag) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "invalid_postal_code":
-		*e = AccountAddressCreate400ApplicationJSON1Tag(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountAddressCreate400ApplicationJSON1Tag: %v", v)
-	}
-}
-
-type AccountAddressCreate400ApplicationJSON1 struct {
-	// The type of error returned
-	DotTag AccountAddressCreate400ApplicationJSON1Tag `json:".tag"`
-	// A human-readable error message, which might include information specific to
-	// the request that was made.
-	//
-	Message string `json:"message"`
-}
-
-func (o *AccountAddressCreate400ApplicationJSON1) GetDotTag() AccountAddressCreate400ApplicationJSON1Tag {
-	if o == nil {
-		return AccountAddressCreate400ApplicationJSON1Tag("")
-	}
-	return o.DotTag
-}
-
-func (o *AccountAddressCreate400ApplicationJSON1) GetMessage() string {
-	if o == nil {
-		return ""
-	}
-	return o.Message
-}
-
-type AccountAddressCreate400ApplicationJSONType string
-
-const (
-	AccountAddressCreate400ApplicationJSONTypeAccountAddressCreate400ApplicationJSON1 AccountAddressCreate400ApplicationJSONType = "accountAddressCreate_400ApplicationJSON_1"
-	AccountAddressCreate400ApplicationJSONTypeAccountAddressCreate400ApplicationJSON2 AccountAddressCreate400ApplicationJSONType = "accountAddressCreate_400ApplicationJSON_2"
-)
-
-type AccountAddressCreate400ApplicationJSON struct {
-	AccountAddressCreate400ApplicationJSON1 *AccountAddressCreate400ApplicationJSON1
-	AccountAddressCreate400ApplicationJSON2 *AccountAddressCreate400ApplicationJSON2
-
-	Type AccountAddressCreate400ApplicationJSONType
-}
-
-func CreateAccountAddressCreate400ApplicationJSONAccountAddressCreate400ApplicationJSON1(accountAddressCreate400ApplicationJSON1 AccountAddressCreate400ApplicationJSON1) AccountAddressCreate400ApplicationJSON {
-	typ := AccountAddressCreate400ApplicationJSONTypeAccountAddressCreate400ApplicationJSON1
-
-	return AccountAddressCreate400ApplicationJSON{
-		AccountAddressCreate400ApplicationJSON1: &accountAddressCreate400ApplicationJSON1,
-		Type:                                    typ,
-	}
-}
-
-func CreateAccountAddressCreate400ApplicationJSONAccountAddressCreate400ApplicationJSON2(accountAddressCreate400ApplicationJSON2 AccountAddressCreate400ApplicationJSON2) AccountAddressCreate400ApplicationJSON {
-	typ := AccountAddressCreate400ApplicationJSONTypeAccountAddressCreate400ApplicationJSON2
-
-	return AccountAddressCreate400ApplicationJSON{
-		AccountAddressCreate400ApplicationJSON2: &accountAddressCreate400ApplicationJSON2,
-		Type:                                    typ,
-	}
-}
-
-func (u *AccountAddressCreate400ApplicationJSON) UnmarshalJSON(data []byte) error {
-
-	accountAddressCreate400ApplicationJSON1 := new(AccountAddressCreate400ApplicationJSON1)
-	if err := utils.UnmarshalJSON(data, &accountAddressCreate400ApplicationJSON1, "", true, true); err == nil {
-		u.AccountAddressCreate400ApplicationJSON1 = accountAddressCreate400ApplicationJSON1
-		u.Type = AccountAddressCreate400ApplicationJSONTypeAccountAddressCreate400ApplicationJSON1
-		return nil
-	}
-
-	accountAddressCreate400ApplicationJSON2 := new(AccountAddressCreate400ApplicationJSON2)
-	if err := utils.UnmarshalJSON(data, &accountAddressCreate400ApplicationJSON2, "", true, true); err == nil {
-		u.AccountAddressCreate400ApplicationJSON2 = accountAddressCreate400ApplicationJSON2
-		u.Type = AccountAddressCreate400ApplicationJSONTypeAccountAddressCreate400ApplicationJSON2
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u AccountAddressCreate400ApplicationJSON) MarshalJSON() ([]byte, error) {
-	if u.AccountAddressCreate400ApplicationJSON1 != nil {
-		return utils.MarshalJSON(u.AccountAddressCreate400ApplicationJSON1, "", true)
-	}
-
-	if u.AccountAddressCreate400ApplicationJSON2 != nil {
-		return utils.MarshalJSON(u.AccountAddressCreate400ApplicationJSON2, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type: all fields are null")
+	return o.AddressListingInput
 }
 
 type AccountAddressCreateResponse struct {
@@ -315,10 +34,8 @@ type AccountAddressCreateResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// The request is missing required fields, or its fields have invalid values
-	AccountAddressCreate400ApplicationJSONOneOf *AccountAddressCreate400ApplicationJSON
 	// The address was successfully added
-	Oneaccount1addressesPostRequestBodyContentApplication1jsonSchema *shared.Oneaccount1addressesPostRequestBodyContentApplication1jsonSchema
+	AddressListing *shared.AddressListing
 }
 
 func (o *AccountAddressCreateResponse) GetContentType() string {
@@ -342,16 +59,9 @@ func (o *AccountAddressCreateResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *AccountAddressCreateResponse) GetAccountAddressCreate400ApplicationJSONOneOf() *AccountAddressCreate400ApplicationJSON {
+func (o *AccountAddressCreateResponse) GetAddressListing() *shared.AddressListing {
 	if o == nil {
 		return nil
 	}
-	return o.AccountAddressCreate400ApplicationJSONOneOf
-}
-
-func (o *AccountAddressCreateResponse) GetOneaccount1addressesPostRequestBodyContentApplication1jsonSchema() *shared.Oneaccount1addressesPostRequestBodyContentApplication1jsonSchema {
-	if o == nil {
-		return nil
-	}
-	return o.Oneaccount1addressesPostRequestBodyContentApplication1jsonSchema
+	return o.AddressListing
 }

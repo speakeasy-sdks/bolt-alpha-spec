@@ -27,30 +27,6 @@ func (o *AccountAddressDeleteRequest) GetID() string {
 	return o.ID
 }
 
-// AccountAddressDelete422ApplicationJSON - An error has occured, e.g. the identifier is not associated with an existing Bolt account
-type AccountAddressDelete422ApplicationJSON struct {
-	// The type of error returned
-	DotTag string `json:".tag"`
-	// A human-readable error message, which might include information specific to
-	// the request that was made.
-	//
-	Message string `json:"message"`
-}
-
-func (o *AccountAddressDelete422ApplicationJSON) GetDotTag() string {
-	if o == nil {
-		return ""
-	}
-	return o.DotTag
-}
-
-func (o *AccountAddressDelete422ApplicationJSON) GetMessage() string {
-	if o == nil {
-		return ""
-	}
-	return o.Message
-}
-
 type AccountAddressDeleteResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
@@ -58,8 +34,6 @@ type AccountAddressDeleteResponse struct {
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
-	// An error has occured, e.g. the identifier is not associated with an existing Bolt account
-	AccountAddressDelete422ApplicationJSONObject *AccountAddressDelete422ApplicationJSON
 }
 
 func (o *AccountAddressDeleteResponse) GetContentType() string {
@@ -81,11 +55,4 @@ func (o *AccountAddressDeleteResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *AccountAddressDeleteResponse) GetAccountAddressDelete422ApplicationJSONObject() *AccountAddressDelete422ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.AccountAddressDelete422ApplicationJSONObject
 }

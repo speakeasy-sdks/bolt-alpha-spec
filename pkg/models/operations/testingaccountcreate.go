@@ -3,126 +3,39 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
-	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/utils"
 	"net/http"
-	"time"
 )
 
-type TestingAccountCreateRequestBodyEmailState string
-
-const (
-	TestingAccountCreateRequestBodyEmailStateMissing    TestingAccountCreateRequestBodyEmailState = "missing"
-	TestingAccountCreateRequestBodyEmailStateUnverified TestingAccountCreateRequestBodyEmailState = "unverified"
-	TestingAccountCreateRequestBodyEmailStateVerified   TestingAccountCreateRequestBodyEmailState = "verified"
-)
-
-func (e TestingAccountCreateRequestBodyEmailState) ToPointer() *TestingAccountCreateRequestBodyEmailState {
-	return &e
+type TestingAccountCreateSecurity struct {
+	APIKey string `security:"scheme,type=apiKey,subtype=header,name=X-API-Key"`
 }
 
-func (e *TestingAccountCreateRequestBodyEmailState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "missing":
-		fallthrough
-	case "unverified":
-		fallthrough
-	case "verified":
-		*e = TestingAccountCreateRequestBodyEmailState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TestingAccountCreateRequestBodyEmailState: %v", v)
-	}
-}
-
-type TestingAccountCreateRequestBodyPhoneState string
-
-const (
-	TestingAccountCreateRequestBodyPhoneStateMissing    TestingAccountCreateRequestBodyPhoneState = "missing"
-	TestingAccountCreateRequestBodyPhoneStateUnverified TestingAccountCreateRequestBodyPhoneState = "unverified"
-	TestingAccountCreateRequestBodyPhoneStateVerified   TestingAccountCreateRequestBodyPhoneState = "verified"
-)
-
-func (e TestingAccountCreateRequestBodyPhoneState) ToPointer() *TestingAccountCreateRequestBodyPhoneState {
-	return &e
-}
-
-func (e *TestingAccountCreateRequestBodyPhoneState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "missing":
-		fallthrough
-	case "unverified":
-		fallthrough
-	case "verified":
-		*e = TestingAccountCreateRequestBodyPhoneState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TestingAccountCreateRequestBodyPhoneState: %v", v)
-	}
-}
-
-type TestingAccountCreateRequestBodyInput struct {
-	DeactivateAt time.Time                                 `json:"deactivate_at"`
-	EmailState   TestingAccountCreateRequestBodyEmailState `json:"email_state"`
-	HasAddress   *bool                                     `json:"has_address,omitempty"`
-	IsMigrated   *bool                                     `json:"is_migrated,omitempty"`
-	PhoneState   TestingAccountCreateRequestBodyPhoneState `json:"phone_state"`
-}
-
-func (t TestingAccountCreateRequestBodyInput) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *TestingAccountCreateRequestBodyInput) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *TestingAccountCreateRequestBodyInput) GetDeactivateAt() time.Time {
+func (o *TestingAccountCreateSecurity) GetAPIKey() string {
 	if o == nil {
-		return time.Time{}
+		return ""
 	}
-	return o.DeactivateAt
+	return o.APIKey
 }
 
-func (o *TestingAccountCreateRequestBodyInput) GetEmailState() TestingAccountCreateRequestBodyEmailState {
-	if o == nil {
-		return TestingAccountCreateRequestBodyEmailState("")
-	}
-	return o.EmailState
+type TestingAccountCreateRequest struct {
+	// The publicly viewable identifier used to identify a merchant division.
+	XPublishableKey              string                              `header:"style=simple,explode=false,name=X-Publishable-Key"`
+	AccountTestCreationDataInput shared.AccountTestCreationDataInput `request:"mediaType=application/json"`
 }
 
-func (o *TestingAccountCreateRequestBodyInput) GetHasAddress() *bool {
+func (o *TestingAccountCreateRequest) GetXPublishableKey() string {
 	if o == nil {
-		return nil
+		return ""
 	}
-	return o.HasAddress
+	return o.XPublishableKey
 }
 
-func (o *TestingAccountCreateRequestBodyInput) GetIsMigrated() *bool {
+func (o *TestingAccountCreateRequest) GetAccountTestCreationDataInput() shared.AccountTestCreationDataInput {
 	if o == nil {
-		return nil
+		return shared.AccountTestCreationDataInput{}
 	}
-	return o.IsMigrated
-}
-
-func (o *TestingAccountCreateRequestBodyInput) GetPhoneState() TestingAccountCreateRequestBodyPhoneState {
-	if o == nil {
-		return TestingAccountCreateRequestBodyPhoneState("")
-	}
-	return o.PhoneState
+	return o.AccountTestCreationDataInput
 }
 
 type TestingAccountCreateResponse struct {
@@ -133,7 +46,7 @@ type TestingAccountCreateResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The account was successfully created
-	Onetesting1accountsPostRequestBodyContentApplication1jsonSchema *shared.Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput
+	AccountTestCreationData *shared.AccountTestCreationDataOutput
 }
 
 func (o *TestingAccountCreateResponse) GetContentType() string {
@@ -157,9 +70,9 @@ func (o *TestingAccountCreateResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *TestingAccountCreateResponse) GetOnetesting1accountsPostRequestBodyContentApplication1jsonSchema() *shared.Onetesting1accountsPostRequestBodyContentApplication1jsonSchemaOutput {
+func (o *TestingAccountCreateResponse) GetAccountTestCreationData() *shared.AccountTestCreationDataOutput {
 	if o == nil {
 		return nil
 	}
-	return o.Onetesting1accountsPostRequestBodyContentApplication1jsonSchema
+	return o.AccountTestCreationData
 }

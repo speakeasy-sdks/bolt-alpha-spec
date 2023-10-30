@@ -13,36 +13,36 @@ import (
 )
 
 func main() {
-	s := boltalphaspec.New()
-
-	operationSecurity := operations.AccountAddPaymentMethodSecurity{
-		APIKey: "",
-		Oauth:  "",
-	}
+	s := boltalphaspec.New(
+		boltalphaspec.WithSecurity(shared.Security{
+			APIKey: "",
+			Oauth:  "",
+		}),
+	)
 
 	ctx := context.Background()
-	res, err := s.Account.AccountAddPaymentMethod(ctx, operations.AccountAddPaymentMethodRequest{
-		RequestBody: operations.AccountAddPaymentMethodRequestBodyInput{
-			BillingAddress: shared.CreateOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressInputOnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID(
-				shared.OnepaymentsPostRequestBodyContentApplication1jsonSchemaPropertiesCartPropertiesShipmentsItemsPropertiesAddressAddressID{
-					DotTag: "id",
-					ID:     "D4g3h5tBuVYK9",
-				},
-			),
-			Bin:        "411111",
-			Expiration: "2025-03",
-			Last4:      "1004",
-			Network:    operations.AccountAddPaymentMethodRequestBodyNetworkVisa,
-			Token:      "a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0",
-			Type:       operations.AccountAddPaymentMethodRequestBodyTypeCredit,
-		},
+	res, err := s.Account.AddAddress(ctx, operations.AccountAddressCreateRequest{
 		XPublishableKey: "string",
-	}, operationSecurity)
+		AddressListingInput: shared.AddressListingInput{
+			Company:        boltalphaspec.String("ACME Corporation"),
+			CountryCode:    shared.AddressListingCountryCodeUs,
+			Email:          boltalphaspec.String("alice@example.com"),
+			FirstName:      "Alice",
+			IsDefault:      boltalphaspec.Bool(true),
+			LastName:       "Baker",
+			Locality:       "San Francisco",
+			Phone:          boltalphaspec.String("+14155550199"),
+			PostalCode:     "94105",
+			Region:         boltalphaspec.String("CA"),
+			StreetAddress1: "535 Mission St, Ste 1401",
+			StreetAddress2: boltalphaspec.String("c/o Shipping Department"),
+		},
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.Oneaccount1paymentMethodsPostRequestBodyContentApplication1jsonSchema != nil {
+	if res.AddressListing != nil {
 		// handle response
 	}
 }
