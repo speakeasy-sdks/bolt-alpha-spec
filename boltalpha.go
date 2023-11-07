@@ -60,7 +60,7 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 }
 
 type BoltAlpha struct {
-	Pets *pets
+	Pets *Pets
 
 	sdkConfiguration sdkConfiguration
 }
@@ -115,9 +115,9 @@ func New(opts ...SDKOption) *BoltAlpha {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.7.2",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 0.7.2 2.173.0 1.0.0 github.com/speakeasy-sdks/bolt-alpha-spec",
+			SDKVersion:        "0.8.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 0.8.0 2.181.1 1.0.0 github.com/speakeasy-sdks/bolt-alpha-spec",
 		},
 	}
 	for _, opt := range opts {

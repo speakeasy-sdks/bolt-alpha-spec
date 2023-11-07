@@ -40,7 +40,7 @@ func main() {
 ## Available Resources and Operations
 
 
-### [Pets](docs/sdks/pets/README.md)
+### [.Pets](docs/sdks/pets/README.md)
 
 * [CreatePets](docs/sdks/pets/README.md#createpets) - Create a pet
 * [ListPets](docs/sdks/pets/README.md#listpets) - List all pets
@@ -94,7 +94,6 @@ You can override the default server globally using the `WithServerIndex` option 
 
 For example:
 
-
 ```go
 package main
 
@@ -126,7 +125,6 @@ func main() {
 ## Override Server URL Per-Client
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
-
 
 ```go
 package main
