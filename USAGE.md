@@ -1,6 +1,4 @@
 <!-- Start SDK Example Usage -->
-
-
 ```go
 package main
 
@@ -8,6 +6,7 @@ import (
 	"context"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"log"
+	"net/http"
 )
 
 func main() {

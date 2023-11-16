@@ -17,9 +17,10 @@ Create a pet
 package main
 
 import(
+	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"context"
 	"log"
-	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"net/http"
 )
 
 func main() {
@@ -61,10 +62,10 @@ List all pets
 package main
 
 import(
-	"context"
-	"log"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"context"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -107,10 +108,10 @@ Info for a specific pet
 package main
 
 import(
-	"context"
-	"log"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"context"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/operations"
+	"log"
 )
 
 func main() {
