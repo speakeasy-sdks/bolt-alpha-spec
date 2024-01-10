@@ -115,9 +115,9 @@ func New(opts ...SDKOption) *BoltAlpha {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.9.1",
-			GenVersion:        "2.225.2",
-			UserAgent:         "speakeasy-sdk/go 0.9.1 2.225.2 1.0.0 github.com/speakeasy-sdks/bolt-alpha-spec",
+			SDKVersion:        "0.9.2",
+			GenVersion:        "2.230.3",
+			UserAgent:         "speakeasy-sdk/go 0.9.2 2.230.3 1.0.0 github.com/speakeasy-sdks/bolt-alpha-spec",
 		},
 	}
 	for _, opt := range opts {

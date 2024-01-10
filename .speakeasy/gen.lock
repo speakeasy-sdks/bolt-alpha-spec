@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 1e7e759c-8433-45ea-b575-f7c515e25a87
 management:
-  docChecksum: 2516596125ef223fbbef6c434d22eaac
+  docChecksum: 1bdb7a6f8bf3995d4b40475228403253
   docVersion: 1.0.0
   speakeasyVersion: internal
-  generationVersion: 2.225.2
-  releaseVersion: 0.9.1
-  configChecksum: 2d819564c211164738365dbe25ee7990
+  generationVersion: 2.230.3
+  releaseVersion: 0.9.2
+  configChecksum: 52c964454dfb5d0d3b7fdcdb59c9ffc0
   repoURL: https://github.com/speakeasy-sdks/bolt-alpha-spec.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/bolt-alpha-spec

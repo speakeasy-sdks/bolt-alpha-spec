@@ -19,6 +19,7 @@ package main
 import (
 	"context"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"log"
 	"net/http"
 )
@@ -27,7 +28,10 @@ func main() {
 	s := boltalphaspec.New()
 
 	ctx := context.Background()
-	res, err := s.Pets.CreatePets(ctx)
+	res, err := s.Pets.CreatePets(ctx, shared.Pet{
+		ID:   596804,
+		Name: "string",
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -83,6 +87,7 @@ import (
 	"errors"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/sdkerrors"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"log"
 )
 
@@ -90,7 +95,10 @@ func main() {
 	s := boltalphaspec.New()
 
 	ctx := context.Background()
-	res, err := s.Pets.CreatePets(ctx)
+	res, err := s.Pets.CreatePets(ctx, shared.Pet{
+		ID:   596804,
+		Name: "string",
+	})
 	if err != nil {
 
 		var e *sdkerrors.SDKError
@@ -125,6 +133,7 @@ package main
 import (
 	"context"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"log"
 	"net/http"
 )
@@ -135,7 +144,10 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.Pets.CreatePets(ctx)
+	res, err := s.Pets.CreatePets(ctx, shared.Pet{
+		ID:   596804,
+		Name: "string",
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -157,6 +169,7 @@ package main
 import (
 	"context"
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
+	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"log"
 	"net/http"
 )
@@ -167,7 +180,10 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.Pets.CreatePets(ctx)
+	res, err := s.Pets.CreatePets(ctx, shared.Pet{
+		ID:   596804,
+		Name: "string",
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
