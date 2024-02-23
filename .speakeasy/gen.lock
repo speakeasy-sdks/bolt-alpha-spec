@@ -5,8 +5,8 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: internal
   generationVersion: 2.269.0
-  releaseVersion: 0.11.2
-  configChecksum: 8f51e4de49e6fbe70133bc5fdcc85758
+  releaseVersion: 0.11.3
+  configChecksum: d1a782f670b9340d8a28a0371cf6539c
   repoURL: https://github.com/speakeasy-sdks/bolt-alpha-spec.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/bolt-alpha-spec
