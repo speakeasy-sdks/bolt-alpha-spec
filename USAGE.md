@@ -7,7 +7,6 @@ import (
 	boltalphaspec "github.com/speakeasy-sdks/bolt-alpha-spec"
 	"github.com/speakeasy-sdks/bolt-alpha-spec/pkg/models/shared"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -21,8 +20,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	if res.StatusCode == http.StatusOK {
+	if res != nil {
 		// handle response
 	}
 }

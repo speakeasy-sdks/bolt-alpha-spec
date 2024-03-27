@@ -3,18 +3,19 @@ id: 1e7e759c-8433-45ea-b575-f7c515e25a87
 management:
   docChecksum: 1bdb7a6f8bf3995d4b40475228403253
   docVersion: 1.0.0
-  speakeasyVersion: internal
-  generationVersion: 2.263.3
-  releaseVersion: 0.11.1
-  configChecksum: 3a1f69881c45dbe9dec92ef5d91def8d
+  speakeasyVersion: 1.227.0
+  generationVersion: 2.291.0
+  releaseVersion: 0.12.2
+  configChecksum: 51c996ff211461c4555b53741f839c80
   repoURL: https://github.com/speakeasy-sdks/bolt-alpha-spec.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/bolt-alpha-spec
   published: true
 features:
   go:
-    core: 3.4.1
-    globalServerURLs: 2.82.1
+    core: 3.4.5
+    globalServerURLs: 2.82.2
+    responseFormat: 0.1.0
 generatedFiles:
   - pets.go
   - boltalpha.go

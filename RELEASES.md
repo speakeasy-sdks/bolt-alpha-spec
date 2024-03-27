@@ -259,3 +259,53 @@ Based on:
 - [go v0.11.1] .
 ### Releases
 - [Go v0.11.1] https://github.com/speakeasy-sdks/bolt-alpha-spec/releases/tag/v0.11.1 - .
+
+## 2024-02-23 18:29:23
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.193.0 (2.269.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.11.2] .
+### Releases
+- [Go v0.11.2] https://github.com/speakeasy-sdks/bolt-alpha-spec/releases/tag/v0.11.2 - .
+
+## 2024-02-24 00:59:12
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.193.4 (2.272.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.11.3] .
+### Releases
+- [Go v0.11.3] https://github.com/speakeasy-sdks/bolt-alpha-spec/releases/tag/v0.11.3 - .
+
+## 2024-03-08 00:47:17
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.204.1 (2.279.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.12.0] .
+### Releases
+- [Go v0.12.0] https://github.com/speakeasy-sdks/bolt-alpha-spec/releases/tag/v0.12.0 - .
+
+## 2024-03-13 00:53:39
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.207.1 (2.280.6) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.12.1] .
+### Releases
+- [Go v0.12.1] https://github.com/speakeasy-sdks/bolt-alpha-spec/releases/tag/v0.12.1 - .
+
+## 2024-03-27 01:09:13
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.227.0 (2.291.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.12.2] .
+### Releases
+- [Go v0.12.2] https://github.com/speakeasy-sdks/bolt-alpha-spec/releases/tag/v0.12.2 - .
